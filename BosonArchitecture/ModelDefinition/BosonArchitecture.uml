@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+  dslVersion="1.0.0.0"
+  Id="ab0446c6-e5b7-452a-9ccf-db035b44d499"
+  name="BosonArchitecture" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <component
+        Id="0511c155-94d5-491c-b1b3-c9259d542e53"
+        name="Boson Core"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="59cddbee-a02e-4216-a1b0-ba935a0bd86b">
+            <componentMoniker
+              Id="c337c3d4-adbe-4b19-9dc8-5ce0831c7b9a"
+              LastKnownName="Account Manager"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+          <dependency
+            Id="c912236e-95a8-47a7-a6e8-0b9995463bb1">
+            <componentMoniker
+              Id="be87474a-742c-41d5-804c-3cb379a93a12"
+              LastKnownName="Commands"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+          <dependency
+            Id="aae207c2-fb5c-411d-a690-d91645fed43a">
+            <componentMoniker
+              Id="acabefd4-5ec7-433d-a5af-7df3273abfc2"
+              LastKnownName="Log Manager"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <requiredInterface
+            Id="43295045-7539-4900-a97f-f5536390d876"
+            name="LoggingPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="746a3d73-021b-4bad-a2a6-e74d2f065d4c">
+                <providedInterfaceMoniker
+                  Id="6c49750a-c73b-4baa-b8dd-dad04bf0a656"
+                  LastKnownName="Port1"
+                  LastKnownLocation="BosonArchitecture.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="d3788645-6403-401d-8e88-8bfdbc51d6fd"
+                LastKnownName="Logging"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="235baf4f-7be9-444e-9333-c8aa8b60853f"
+            name="CommandsPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="0c28fdaf-338e-4df3-8172-762332e8a0e8"
+                LastKnownName="Commands"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="db3640c7-3801-47d8-8775-8b192ef4d9dd"
+            name="AccountsPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="48e30e43-aaaf-4808-a99d-f5361c8d8dd3"
+                LastKnownName="Accounts"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="7cb79562-bbb7-4e47-b6ee-69ecfdbe3b52"
+            name="BlacklistPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="251e5752-7cf8-48de-b6cb-5250506efde6"
+                LastKnownName="Blacklist"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="8bc780b1-10df-4baa-9c8a-c1b444e767e5"
+            name="InteropPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="ed427233-0387-4b52-98e0-6bd392457a18">
+                <providedInterfaceMoniker
+                  Id="f95be02d-430b-42ec-a523-927d906cddd0"
+                  LastKnownName="Port1"
+                  LastKnownLocation="BosonArchitecture.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="4a5531ee-e708-4a51-b878-cf9e18cd9f00"
+                LastKnownName="[Interop]"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="f9f9b1c2-f819-4c2b-9a49-2e6b15caca50"
+            name="MemoryAccessPort"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <suppliersInternal>
+              <dependency
+                Id="db158589-7a79-4343-91fb-0b9e21a8025b">
+                <providedInterfaceMoniker
+                  Id="f95be02d-430b-42ec-a523-927d906cddd0"
+                  LastKnownName="Port1"
+                  LastKnownLocation="BosonArchitecture.uml" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="f6389e8e-f84a-44e9-a49e-205fac4e1292"
+                LastKnownName="Memory access"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="17562b95-614f-47eb-bda6-7f1a41f14088"
+        name="Component1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="d5902934-5dc1-4671-8015-2e3b58ebcefa"
+        name="BosonCommands"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="83f45edd-c825-45de-b92f-add124414110"
+        name="Component2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="be87474a-742c-41d5-804c-3cb379a93a12"
+        name="Commands"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="555358b7-26de-4d39-b03f-400365e42fff">
+            <providedInterfaceMoniker
+              Id="6b36a84f-7bb9-4232-a3e6-1fb6698c2cbb"
+              LastKnownName="Port1"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+          <dependency
+            Id="1c784d99-d33e-451f-ae3f-00d0200187cf">
+            <providedInterfaceMoniker
+              Id="7dbffd99-0be3-409b-8954-67c3e8f734cf"
+              LastKnownName="Port1"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="c337c3d4-adbe-4b19-9dc8-5ce0831c7b9a"
+        name="Account Manager"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="c56927b2-762b-48e1-a26c-2478ffca55ef">
+            <providedInterfaceMoniker
+              Id="6b36a84f-7bb9-4232-a3e6-1fb6698c2cbb"
+              LastKnownName="Port1"
+              LastKnownLocation="BosonArchitecture.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="7dbffd99-0be3-409b-8954-67c3e8f734cf"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="0821a007-eb76-4f14-a271-f5b259729461"
+                LastKnownName="Login &amp; Registration"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="acabefd4-5ec7-433d-a5af-7df3273abfc2"
+        name="Log Manager"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="6b36a84f-7bb9-4232-a3e6-1fb6698c2cbb"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="105fcb73-c3ed-42f6-aa89-6a0187648d47"
+                LastKnownName="Logging"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="105fcb73-c3ed-42f6-aa89-6a0187648d47"
+        name="Logging"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="0821a007-eb76-4f14-a271-f5b259729461"
+        name="Login &amp; Registration"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d3788645-6403-401d-8e88-8bfdbc51d6fd"
+        name="Logging"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="0c28fdaf-338e-4df3-8172-762332e8a0e8"
+        name="Commands"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="48e30e43-aaaf-4808-a99d-f5361c8d8dd3"
+        name="Accounts"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="251e5752-7cf8-48de-b6cb-5250506efde6"
+        name="Blacklist"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="4a5531ee-e708-4a51-b878-cf9e18cd9f00"
+        name="[Interop]"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="f6389e8e-f84a-44e9-a49e-205fac4e1292"
+        name="Memory access"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="0a45debe-df8b-40e6-8617-e7bc1c7df5fb"
+        name="LogManager"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="6c49750a-c73b-4baa-b8dd-dad04bf0a656"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="6e6c4f7d-c4ae-45fe-8e96-9498d7f7212a"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="bd2689fe-e2c2-4a0f-a3d0-f622c16ff312"
+        name="Logging"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="6e6c4f7d-c4ae-45fe-8e96-9498d7f7212a"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="61c908bb-71fa-453a-ad46-8de178aee887"
+        name="Component3"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="88bde035-70d9-48c6-9db7-c0517e7a2055"
+        name="CommandRepository"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="f60c64a5-b1d8-4574-b99a-55db4e92dfd3"
+        name="ISGateway"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="f95be02d-430b-42ec-a523-927d906cddd0"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="557643c4-14c4-4137-b030-9e8377dd2337"
+                LastKnownName="Access to InfinityScript-provided data"
+                LastKnownLocation="BosonArchitecture.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="557643c4-14c4-4137-b030-9e8377dd2337"
+        name="Access to InfinityScript-provided data"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
