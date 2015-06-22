@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfinityScript;
 
-namespace ProjectBoson.Core
+namespace ProjectBoson
 {
     /// <summary>
     /// Contains an entity's title and clantag.
     /// </summary>
-    public class Callsign
+	public struct Callsign : IEquatable<Callsign>
     {
         /// <summary>
         /// 7-byte long array containing the clantag.
@@ -19,6 +20,8 @@ namespace ProjectBoson.Core
         /// 24-byte long array containing the callsign title.
         /// </summary>
         public byte[] Title { get; private set; }
+
+		// TODO: Find the offsets for the callsign background and emblem
 
         /// <summary>
         /// Initializes a new instance of the Callsign class
@@ -32,24 +35,6 @@ namespace ProjectBoson.Core
         }
 
         /// <summary>
-        /// Initializes a new instance of the Callsign class.
-        /// </summary>
-        /// <param name="entity"><see cref="InfinityScript.Entity"/> from which the callsign details will be obtained from.</param>
-        public Callsign(InfinityScript.Entity entity)
-            : this(NativeGateway.GetClantag(entity), NativeGateway.GetTitle(entity))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the Callsign class.
-        /// </summary>
-        /// <param name="entity"><see cref="BosonEntity"/> from which the callsign details will be obtained from.</param>
-        public Callsign(BosonEntity entity)
-            : this(entity.BaseEntity)
-        {
-        }
-
-        /// <summary>
         /// Gets a string representation of the clantag.
         /// </summary>
         /// <param name="trimNulls">If <see langword="true"/>, trailing null characters will be trimmed from the returned string.</param>
@@ -57,7 +42,7 @@ namespace ProjectBoson.Core
         /// <remarks><note type="important">While the game client only saves 4 bytes of the clantag into file, a memory editor can be used to equip a 7-byte clantag into servers.</note></remarks>
         public string GetClantag(bool trimNulls = true)
         {
-            return NativeGateway.GetString(Clantag, trimNulls);
+			return NativeGateway.GetEncodedString(Clantag, trimNulls);
         }
 
         /// <summary>
@@ -67,7 +52,56 @@ namespace ProjectBoson.Core
         /// <returns></returns>
         public string GetTitle(bool trimNulls = true)
         {
-            return NativeGateway.GetString(Title, trimNulls);
+			return NativeGateway.GetEncodedString(Title, trimNulls);
         }
+
+		#region IEquatable implementation
+
+		public bool Equals(Callsign other)
+		{
+			return 	Clantag != null && // Gotta check all these nulls because otherwise SequenceEquals will throw
+					Title != null &&
+					other.Clantag != null &&
+					other.Title != null &&
+					Clantag.SequenceEqual(other.Clantag) &&
+					Title.SequenceEqual(other.Clantag);
+		}
+
+		#endregion
+
+		#region Object overloads
+
+		public override bool Equals(object obj)
+		{
+			return obj is Callsign &&
+				   Equals((Callsign)obj);
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hash = 39916801;
+				hash = hash * 479001599 + Title.GetHashCode();
+				hash = hash * 479001599 + Clantag.GetHashCode();
+				return hash;
+			}
+		}
+
+		#endregion
+
+		#region Operators
+
+		public static bool operator ==(Callsign a, Callsign b)
+		{
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(Callsign a, Callsign b)
+		{
+			return !(a == b);
+		}
+
+		#endregion
     }
 }

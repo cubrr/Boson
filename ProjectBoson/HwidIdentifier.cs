@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfinityScript;
 
-namespace ProjectBoson.Core
+namespace ProjectBoson
 {
     /// <summary>
     /// Represents a 12-byte HWID.
@@ -15,6 +16,7 @@ namespace ProjectBoson.Core
         /// String representation of the 12-byte ID.
         /// </summary>
         public readonly string Identifier;
+
         /// <summary>
         /// Initializes a new instance of the BosonIdentifier class with the specified ID.
         /// </summary>
@@ -24,16 +26,40 @@ namespace ProjectBoson.Core
             Identifier = hwid;
         }
 
+		#region IEquatable interface implementation
+
         public bool Equals(HwidIdentifier other)
         {
             return String.Equals(Identifier, other.Identifier, StringComparison.OrdinalIgnoreCase);
         }
+
+		#endregion
+
+		#region Object overloads
 
         public override bool Equals(object obj)
         {
             return obj is HwidIdentifier &&
                    this == (HwidIdentifier)obj;
         }
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int x = 15485807 + Identifier.GetHashCode();
+				return x * 49724659;
+			}
+		}
+
+		public override string ToString()
+		{
+			return Identifier;
+		}
+
+		#endregion
+
+		#region Operators
 
         public static bool operator ==(HwidIdentifier left, HwidIdentifier right)
         {
@@ -45,19 +71,6 @@ namespace ProjectBoson.Core
             return !(left == right);
         }
 
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int x = 15485807 + Identifier.GetHashCode();
-                return x * 49724659;
-            }
-        }
-
-        public override string ToString()
-        {
-            return Identifier;
-        }
+		#endregion
     }
 }

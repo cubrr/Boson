@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InfinityScript;
+using ProjectBoson.Commands;
 
-namespace ProjectBoson.Core
+namespace ProjectBoson
 {
     public class EventController
     {
         private readonly Boson _bosonInstance;
+		private readonly CommandManager _commandManager;
 
         protected EventController() {}
-        public EventController(Boson boson)
+        public EventController(Boson boson, CommandManager commandManager)
         {
             _bosonInstance = boson;
+			_commandManager = commandManager;
         }
 
         public void Boson_PlayerConnecting(Entity obj)
@@ -33,7 +36,10 @@ namespace ProjectBoson.Core
 
         public BaseScript.EventEat Boson_OnSay3(Entity player, BaseScript.ChatType chatType, string name, ref string message)
         {
-            return BaseScript.EventEat.EatNone;
+			if (String.IsNullOrWhiteSpace(message))
+				return BaseScript.EventEat.EatNone;
+
+			return BaseScript.EventEat.EatNone;
         }
     }
 }
