@@ -43,16 +43,16 @@ namespace ProjectBoson
             Identifier = hwid;
         }
 
-		#region IEquatable interface implementation
+        #region IEquatable interface implementation
 
         public bool Equals(HwidIdentifier other)
         {
             return String.Equals(Identifier, other.Identifier, StringComparison.OrdinalIgnoreCase);
         }
 
-		#endregion
+        #endregion
 
-		#region Object overloads
+        #region Object overloads
 
         public override bool Equals(object obj)
         {
@@ -60,23 +60,23 @@ namespace ProjectBoson
                    this == (HwidIdentifier)obj;
         }
 
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				int x = 15485807 + Identifier.GetHashCode();
-				return x * 49724659;
-			}
-		}
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int x = 15485807 + Identifier.GetHashCode();
+                return x * 49724659;
+            }
+        }
 
-		public override string ToString()
-		{
-			return Identifier;
-		}
+        public override string ToString()
+        {
+            return Identifier;
+        }
 
-		#endregion
+        #endregion
 
-		#region Operators
+        #region Operators
 
         public static bool operator ==(HwidIdentifier left, HwidIdentifier right)
         {
@@ -88,6 +88,6 @@ namespace ProjectBoson
             return !(left == right);
         }
 
-		#endregion
+        #endregion
     }
 }

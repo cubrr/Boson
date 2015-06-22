@@ -45,52 +45,52 @@ namespace ProjectBoson
             return buffer;
         }
 
-		/// <summary>
-		/// Gets an encoded string representation of specified byte array.
-		/// </summary>
-		/// <param name="bytes">Byte array to encode.</param>
-		/// <param name="trimNulls">If <see langword="true"/>, trailing null characters will be trimmed from the returned string.</param>
-		/// <param name="encoding"><see cref="Encoding"/> with which the string will be encoded in. If <see langword="null"/>, <see cref="ApplicationSettings.Encoding"/> will be used.</param>
-		/// <returns></returns>
-		public static string GetEncodedString(byte[] bytes, bool trimNulls = true, Encoding encoding = null)
-		{
-			string ret = (encoding ?? ApplicationSettings.Encoding).GetString(bytes);
-			return trimNulls ? ret.TrimEnd('\0') : ret;
-		}
+        /// <summary>
+        /// Gets an encoded string representation of specified byte array.
+        /// </summary>
+        /// <param name="bytes">Byte array to encode.</param>
+        /// <param name="trimNulls">If <see langword="true"/>, trailing null characters will be trimmed from the returned string.</param>
+        /// <param name="encoding"><see cref="Encoding"/> with which the string will be encoded in. If <see langword="null"/>, <see cref="ApplicationSettings.Encoding"/> will be used.</param>
+        /// <returns></returns>
+        public static string GetEncodedString(byte[] bytes, bool trimNulls = true, Encoding encoding = null)
+        {
+            string ret = (encoding ?? ApplicationSettings.Encoding).GetString(bytes);
+            return trimNulls ? ret.TrimEnd('\0') : ret;
+        }
 
-		/// <summary>
-		/// Gets the callsign title of the provided <see cref="Entity"/>.
-		/// </summary>
-		/// <param name="entity">Entity whose callsign title will be returned.</param>
-		/// <returns>A new byte[24] containing the entity's callsign title.</returns>
-		public static byte[] GetTitle(Entity entity)
-		{
-			var titleAddress = new IntPtr(0x1AC5548 + (entity.EntRef * 0x38A4));
-			return CopyBytes(titleAddress, 24);
-		}
+        /// <summary>
+        /// Gets the callsign title of the provided <see cref="Entity"/>.
+        /// </summary>
+        /// <param name="entity">Entity whose callsign title will be returned.</param>
+        /// <returns>A new byte[24] containing the entity's callsign title.</returns>
+        public static byte[] GetTitle(Entity entity)
+        {
+            var titleAddress = new IntPtr(0x1AC5548 + (entity.EntRef * 0x38A4));
+            return CopyBytes(titleAddress, 24);
+        }
 
-		/// <summary>
-		/// Gets the clantag of the provided <see cref="Entity"/>.
-		/// </summary>
-		/// <param name="entity">Entity whose clantag will be returned.</param>
-		/// <returns>A new byte[7] containing the entity's clantag.</returns>
-		public static byte[] GetClantag(Entity entity)
-		{
-			var tagAddress = new IntPtr(0x1AC5564 + (entity.EntRef * 0x38A4));
-			return CopyBytes(tagAddress, 7);
-		}
+        /// <summary>
+        /// Gets the clantag of the provided <see cref="Entity"/>.
+        /// </summary>
+        /// <param name="entity">Entity whose clantag will be returned.</param>
+        /// <returns>A new byte[7] containing the entity's clantag.</returns>
+        public static byte[] GetClantag(Entity entity)
+        {
+            var tagAddress = new IntPtr(0x1AC5564 + (entity.EntRef * 0x38A4));
+            return CopyBytes(tagAddress, 7);
+        }
 
         public static string GetHwid(Entity entity)
-		{
-			var hwidAddress = new IntPtr((0x49EB690 + (entity.EntRef * 0x78688) + 0x44CA5));
-			var bytes = CopyBytes(hwidAddress, 12);
+        {
+            var hwidAddress = new IntPtr((0x49EB690 + (entity.EntRef * 0x78688) + 0x44CA5));
+            var bytes = CopyBytes(hwidAddress, 12);
 
-			var sb = new StringBuilder();
-			for (int i = 0; i < 3; i++)
-			{
-				sb.AppendFormat("{0:X8}", BitConverter.ToUInt32(bytes, i * 4) ^ 0xDEADDEAD);
-			}
-			return sb.ToString();
-		}
+            var sb = new StringBuilder();
+            for (int i = 0; i < 3; i++)
+            {
+                sb.AppendFormat("{0:X8}", BitConverter.ToUInt32(bytes, i * 4) ^ 0xDEADDEAD);
+            }
+            return sb.ToString();
+        }
     }
 }

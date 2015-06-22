@@ -1,14 +1,11 @@
 ﻿<Properties StartupItem="ProjectBoson/ProjectBoson.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectBoson/Commands/CommandInvokationContext.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectBoson/Boson.cs">
     <Files>
-      <File FileName="ProjectBoson/Commands/CommandInvokationContext.cs" Line="7" Column="16" />
-      <File FileName="ProjectBoson/Commands/CommandManager.cs" Line="1" Column="1" />
-      <File FileName="ProjectBoson/Commands/CommandAlias.cs" Line="1" Column="1" />
-      <File FileName="ProjectBoson/Commands/Command.cs" Line="1" Column="1" />
-      <File FileName="ProjectBoson/Boson.cs" Line="1" Column="1" />
-      <File FileName="ProjectBoson/Mono/MonoUtilities.cs" Line="1" Column="1" />
-      <File FileName="ProjectBoson/Properties/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="ProjectBoson/Commands/Command.cs" Line="46" Column="31" />
+      <File FileName="ProjectBoson/Boson.cs" Line="54" Column="10" />
+      <File FileName="ProjectBoson/BosonEntity.cs" Line="32" Column="55" />
+      <File FileName="ProjectBoson/EventController.cs" Line="39" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

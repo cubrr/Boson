@@ -82,12 +82,12 @@ namespace ProjectBoson.Meta
             return GetMethodValue<string>("Mono.Runtime", "GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
         }
 
-		public static string GetAssemblyVersion()
-		{
-			var assembly = typeof(MetaUtilities).Assembly;
-			var name = assembly.GetName();
-			var version = name.Version;
-			return version.ToString();
-		}
+        public static string GetAssemblyVersion()
+        {
+            var assembly = typeof(MetaUtilities).Assembly;
+            var name = assembly.GetName();
+            var version = name.Version;
+            return version.ToString();
+        }
     }
 }

@@ -38,11 +38,11 @@ namespace ProjectBoson
         public Boson()
         {
             Log.Info("Starting Boson.");
-			#if DEBUG
-			Log.Info(GetDebugInformation());
-			#endif
+            #if DEBUG
+            Log.Info(GetDebugInformation());
+            #endif
 
-			_eventController = new EventController(this, new CommandManager());
+            _eventController = new EventController(this, new CommandManager());
             PlayerConnecting += _eventController.Boson_PlayerConnecting;
             PlayerConnected += _eventController.Boson_PlayerConnected;
             PlayerDisconnected += _eventController.Boson_PlayerDisconnected;
@@ -53,14 +53,14 @@ namespace ProjectBoson
             return _eventController.Boson_OnSay3(player, type, name, ref message);
         }
 
-		#if DEBUG
-		private static string GetDebugInformation()
-		{
-			string ret = "Debug information\r\n-----------------" +
-			             "Mono runtime version: " + MetaUtilities.GetMonoVersion() + "\r\n" +
-						 "Assembly version: " + MetaUtilities.GetAssemblyVersion();
-			return ret;
-		}
-		#endif
+        #if DEBUG
+        private static string GetDebugInformation()
+        {
+            string ret = "Debug information\r\n-----------------" +
+                         "Mono runtime version: " + MetaUtilities.GetMonoVersion() + "\r\n" +
+                         "Assembly version: " + MetaUtilities.GetAssemblyVersion();
+            return ret;
+        }
+        #endif
     }
 }

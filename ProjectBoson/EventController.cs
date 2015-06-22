@@ -27,13 +27,13 @@ namespace ProjectBoson
     public class EventController
     {
         private readonly Boson _bosonInstance;
-		private readonly CommandManager _commandManager;
+        private readonly CommandManager _commandManager;
 
         protected EventController() {}
         public EventController(Boson boson, CommandManager commandManager)
         {
             _bosonInstance = boson;
-			_commandManager = commandManager;
+            _commandManager = commandManager;
         }
 
         public void Boson_PlayerConnecting(Entity obj)
@@ -53,10 +53,10 @@ namespace ProjectBoson
 
         public BaseScript.EventEat Boson_OnSay3(Entity player, BaseScript.ChatType chatType, string name, ref string message)
         {
-			if (String.IsNullOrWhiteSpace(message))
-				return BaseScript.EventEat.EatNone;
+            if (String.IsNullOrWhiteSpace(message))
+                return BaseScript.EventEat.EatNone;
 
-			return BaseScript.EventEat.EatNone;
+            return BaseScript.EventEat.EatNone;
         }
     }
 }
