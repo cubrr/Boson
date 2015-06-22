@@ -8,7 +8,7 @@ using System.Threading;
 using InfinityScript;
 using ProjectBoson;
 using ProjectBoson.Models;
-using ProjectBoson.Mono;
+using ProjectBoson.Meta;
 using ProjectBoson.Commands;
 
 namespace ProjectBoson
@@ -40,7 +40,8 @@ namespace ProjectBoson
 		private static string GetDebugInformation()
 		{
 			string ret = "Debug information\r\n-----------------" +
-						 "Mono runtime version: " + MonoUtilities.GetMonoVersion();
+			             "Mono runtime version: " + MetaUtilities.GetMonoVersion() + "\r\n" +
+						 "Assembly version: " + MetaUtilities.GetAssemblyVersion();
 			return ret;
 		}
 		#endif

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace ProjectBoson.Mono
+namespace ProjectBoson.Meta
 {
-    public static class MonoUtilities
+    public static class MetaUtilities
     {
         /// <summary>
         /// Casts object <paramref name="obj"/> to type <typeparamref name="T"/>. If <paramref name="obj"/> cannot be cast or converted to <typeparamref name="T"/>, returns default(<typeparamref name="T"/>).
@@ -64,5 +64,13 @@ namespace ProjectBoson.Mono
         {
             return GetMethodValue<string>("Mono.Runtime", "GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
         }
+
+		public static string GetAssemblyVersion()
+		{
+			var assembly = typeof(MetaUtilities).Assembly;
+			var name = assembly.GetName();
+			var version = name.Version;
+			return version.ToString();
+		}
     }
 }
