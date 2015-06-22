@@ -18,6 +18,7 @@ namespace ProjectBoson.Commands
 
 		/// <summary>
 		/// Gets the amount of arguments supported by this command. Value is -1 if the command supports variable arguments.
+		/// This property dictates the minimum amount of words in a <see cref="ProjectBoson.ChatMessage"/> accepted.
 		/// </summary>
 		/// <value>The amount of arguments supported or -1 if the amoun is variable.</value>
 		public virtual int ArgCount { get; protected set; }

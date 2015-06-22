@@ -20,6 +20,10 @@ namespace ProjectBoson.Commands
 			_commands = new Dictionary<string, Command>();
         }
 
+		/// <summary>
+		/// Adds the specified command to the command dictionary.
+		/// </summary>
+		/// <param name="command">Command to add.</param>
 		public void Add(Command command)
 		{
 			if (String.IsNullOrWhiteSpace(command.Name))
@@ -30,6 +34,10 @@ namespace ProjectBoson.Commands
 			_commands[command.Name] = command;
 		}
 
+		/// <summary>
+		/// Adds multiple commands to the command dictionary.
+		/// </summary>
+		/// <param name="commands">Commands to add.</param>
 		public void AddRange(IEnumerable<Command> commands)
 		{
 			if (commands == null)
@@ -59,7 +67,7 @@ namespace ProjectBoson.Commands
 		}
 
 		/// <inheritdoc/>
-		public Command this[string key]
+		private Command this[string key]
 		{
 			get 
 			{

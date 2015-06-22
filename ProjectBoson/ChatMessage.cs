@@ -1,13 +1,20 @@
 ﻿using System;
+using InfinityScript;
 
 namespace ProjectBoson
 {
 	public class ChatMessage
 	{
 		/// <summary>
+		/// Gets the type of the chat where the message originates from.
+		/// </summary>
+		/// <value>The type of the chat.</value>
+		public BaseScript.ChatType ChatType { get; private set; }
+
+		/// <summary>
 		/// Gets the chat message as-is.
 		/// </summary>
-		/// <value>The chat message.</value>
+		/// <value>The unmodified chat message.</value>
 		public string Message { get; private set; }
 
 		/// <summary>
@@ -17,15 +24,15 @@ namespace ProjectBoson
 		/// <value>The words of the message.</value>
 		public string[] Words { get; private set; }
 
-		public ChatMessage(string message)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ProjectBoson.ChatMessage"/> class.
+		/// </summary>
+		/// <param name="message">Chat message.</param>
+		/// <param name="chatType">Type of the chat.</param>
+		public ChatMessage(string message, BaseScript.ChatType chatType)
 		{
 			Message = message;
 			Words = message.Split(' ');
-		}
-
-		public virtual bool IsCommand()
-		{
-			return true;
 		}
 	}
 }
