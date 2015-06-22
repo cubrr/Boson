@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Quarkclan")]
 [assembly: AssemblyProduct("Boson")]
-[assembly: AssemblyCopyright("Copyright © cubrr 2015")]
+[assembly: AssemblyCopyright("Copyright © 2015 Joona Heikkilä")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("fi-FI")]
 
