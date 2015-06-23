@@ -7,7 +7,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ProjectBoson.API</RootNamespace>
     <AssemblyName>ProjectBoson.API</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.1.0.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +33,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Headspring\Enumeration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Accounts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Headspring\LICENSE.txt" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

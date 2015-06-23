@@ -4,14 +4,14 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("ProjectBoson.API")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Boson API")]
+[assembly: AssemblyDescription("A TeknoMW3 administration plugin")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("joona")]
+[assembly: AssemblyCompany("Quarkclan")]
+[assembly: AssemblyProduct("Boson")]
+[assembly: AssemblyCopyright("Copyright © 2015 Joona Heikkilä")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("fi-FI")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
