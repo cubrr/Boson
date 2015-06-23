@@ -55,7 +55,16 @@ namespace ProjectBoson
         {
             if (String.IsNullOrWhiteSpace(message))
                 return BaseScript.EventEat.EatNone;
+            
+            var chatMessage = new ChatMessage(message, chatType);
 
+            string commandName;
+            if (_commandManager.TryGetCommandName(chatMessage, out commandName))
+            {
+                //var context = new CommandInvokationContext(_bosonInstance,)
+                //_commandManager.InvokeCommand(commandName, );
+            }
+            
             return BaseScript.EventEat.EatNone;
         }
     }

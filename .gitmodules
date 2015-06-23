@@ -1,0 +1,3 @@
+[submodule "Enumeration"]
+	path = Enumeration
+	url = git@github.com:HeadspringLabs/Enumeration.git

@@ -90,4 +90,11 @@ namespace ProjectBoson.Meta
             return version.ToString();
         }
     }
+
+    /// <summary>
+    /// Contains assembly and runtime metadata classes.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    internal class NamespaceDoc
+    {} // Sandcastle Help File Builder namespace documentation
 }

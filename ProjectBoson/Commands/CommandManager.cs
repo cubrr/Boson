@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProjectBoson;
 
 namespace ProjectBoson.Commands
 {
@@ -35,6 +36,20 @@ namespace ProjectBoson.Commands
         public CommandManager()
         {
             _commands = new Dictionary<string, Command>();
+        }
+
+        /// <inheritdoc/>
+        private Command this[string key]
+        {
+            get 
+            {
+                Command command;
+                return !_commands.TryGetValue(key, out command) ? null : command;
+            }
+            set
+            {
+                _commands[key] = value;
+            }
         }
 
         /// <summary>
@@ -80,21 +95,22 @@ namespace ProjectBoson.Commands
             if (command == null)
                 return false;
             command.Invoke(context);
+            // TODO: Log command.
             return true;
         }
 
-        /// <inheritdoc/>
-        private Command this[string key]
+        public bool TryGetCommandName(ChatMessage message, out string command)
         {
-            get 
-            {
-                Command command;
-                return !_commands.TryGetValue(key, out command) ? null : command;
-            }
-            set
-            {
-                _commands[key] = value;
-            }
+            command = null;
+
+            if (message.Words == null || message.Words.Length == 0)
+                return false;
+            
+            if (!message.Words[0].StartsWith("!"))
+                return false;
+            
+            command = message.Words[0].Substring(1);
+            return command.Length > 0;
         }
     }
 }

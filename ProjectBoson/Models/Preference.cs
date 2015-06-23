@@ -28,4 +28,11 @@ namespace ProjectBoson.Models
         public virtual string Key { get; set; }
         public virtual string Value { get; set; }
     }
+
+    /// <summary>
+    /// Database models.
+    /// </summary>
+    [System.Runtime.CompilerServices.CompilerGenerated]
+    internal class NamespaceDoc
+    {} // Sandcastle Help File Builder namespace documentation
 }

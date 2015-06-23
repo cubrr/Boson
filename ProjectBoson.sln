@@ -5,7 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBoson", "ProjectBoson\ProjectBoson.csproj", "{AE93D758-3E1D-42C5-B32F-43C248C302ED}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "BosonArchitecture", "BosonArchitecture\BosonArchitecture.modelproj", "{0BCC06B7-6B60-4CC6-9A0F-EA5A4D97F6C6}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "BosonArchitecture", "ProjectBoson.Architecture\BosonArchitecture.modelproj", "{0BCC06B7-6B60-4CC6-9A0F-EA5A4D97F6C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBoson.API", "ProjectBoson.API\ProjectBoson.API.csproj", "{991D3ECA-32D5-494B-A872-EE260A8EF348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{0BCC06B7-6B60-4CC6-9A0F-EA5A4D97F6C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BCC06B7-6B60-4CC6-9A0F-EA5A4D97F6C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BCC06B7-6B60-4CC6-9A0F-EA5A4D97F6C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991D3ECA-32D5-494B-A872-EE260A8EF348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991D3ECA-32D5-494B-A872-EE260A8EF348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991D3ECA-32D5-494B-A872-EE260A8EF348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991D3ECA-32D5-494B-A872-EE260A8EF348}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE93D758-3E1D-42C5-B32F-43C248C302ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE93D758-3E1D-42C5-B32F-43C248C302ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE93D758-3E1D-42C5-B32F-43C248C302ED}.Release|Any CPU.ActiveCfg = Release|Any CPU

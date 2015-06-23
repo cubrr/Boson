@@ -50,6 +50,9 @@
     <Reference Include="InfinityScript">
       <HintPath>External\InfinityScript.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>External\log4net-1.2.13\bin\mono\2.0\release\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boson.cs" />
@@ -69,19 +72,16 @@
     <Compile Include="Commands\CommandAlias.cs" />
     <Compile Include="ChatMessage.cs" />
     <Compile Include="Meta\MetaUtilities.cs" />
+    <Compile Include="EntityController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="External\InfinityScript.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Accounts\" />
     <Folder Include="Logging\" />
     <Folder Include="Ranks\" />
     <Folder Include="Meta\" />
-    <Folder Include="External\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

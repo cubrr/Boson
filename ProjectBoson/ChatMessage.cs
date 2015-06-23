@@ -50,6 +50,7 @@ namespace ProjectBoson
         {
             Message = message;
             Words = message.Split(' ');
+            this.ChatType = chatType;
         }
     }
 }
