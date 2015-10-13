@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\BangCommandParser.cs" />
     <Compile Include="Commands\ICommandParser.cs" />
     <Compile Include="Commands\SimpleCommandParser.cs" />
     <Compile Include="BosonAdmin.cs" />
