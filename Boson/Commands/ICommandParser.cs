@@ -10,6 +10,6 @@ namespace Boson.Commands
     /// </summary>
     public interface ICommandParser
     {
-        bool TryParse(string message, out string[] command);
+        bool TryParse(string message, out string command, out ICollection<string> arguments);
     }
 }

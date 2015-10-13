@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Boson.Commands
 {
@@ -32,9 +33,10 @@ namespace Boson.Commands
         /// <param name="message">Chat message to parse.</param>
         /// <param name="command">Parsed command.</param>
         /// <returns>True if parsing succeeded, otherwise false.</returns>
-        public virtual bool TryParse(string message, out string[] command)
+        public virtual bool TryParse(string message, out string command, out ICollection<string> arguments)
         {
             command = null;
+            arguments = null;
 
             if (!CheckMessageSanity(message))
             {
@@ -42,8 +44,11 @@ namespace Boson.Commands
             }
 
             string untokenizedMessage = message.Substring(_commandPrefix.Length);
-            string[] tokens = untokenizedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None);
-            command = tokens;
+            var tokens = new List<string>(untokenizedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None));
+
+            command = tokens[0];
+            tokens.RemoveAt(0);
+            arguments = tokens;
 
             return true;
         }

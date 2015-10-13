@@ -22,7 +22,9 @@ namespace Boson
         {
             // TODO: Create own class for commands
             string[] command;
-            if (_commandParser.TryParse(message, out command))
+            ICollection<string> arguments;
+
+            if (_commandParser.TryParse(message, out command, out ICollection<string> arguments))
             {
                 // use command
                 return EventEat.EatScript;
