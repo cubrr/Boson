@@ -1,1 +1,4 @@
 # Boson
+
+## License
+GPLv3
