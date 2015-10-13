@@ -21,10 +21,10 @@ namespace Boson
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
             // TODO: Create own class for commands
-            string[] command;
+            string command;
             ICollection<string> arguments;
 
-            if (_commandParser.TryParse(message, out command, out ICollection<string> arguments))
+            if (_commandParser.TryParse(message, out command, out arguments))
             {
                 // use command
                 return EventEat.EatScript;

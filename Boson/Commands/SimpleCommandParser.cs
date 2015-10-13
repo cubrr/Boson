@@ -32,6 +32,7 @@ namespace Boson.Commands
         /// </summary>
         /// <param name="message">Chat message to parse.</param>
         /// <param name="command">Parsed command.</param>
+        /// <param name="arguments">Parsed command arguments.</param>
         /// <returns>True if parsing succeeded, otherwise false.</returns>
         public virtual bool TryParse(string message, out string command, out ICollection<string> arguments)
         {
