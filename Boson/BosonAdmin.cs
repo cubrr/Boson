@@ -15,7 +15,7 @@ namespace Boson
 
         public BosonAdmin()
         {
-            _commandParser = new BangCommandParser();
+            _commandParser = new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " ");
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)

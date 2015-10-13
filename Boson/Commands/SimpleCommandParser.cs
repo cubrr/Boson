@@ -2,51 +2,27 @@
 
 namespace Boson.Commands
 {
-    internal abstract class SimpleCommandParser : ICommandParser
+    /// <summary>
+    /// Simple command parser which parses commands prefixed with the provided
+    /// symbol and parameters separated with the token delimiter.
+    /// </summary>
+    internal class SimpleCommandParser : ICommandParser
     {
         private readonly string _commandPrefix;
-
-        // TODO: Clean below if unused
-        //private readonly string _tokenDelimiter;
 
         /// <summary>
         ///     Cache instance of the delimiter for use with String.Split
         /// </summary>
         private readonly string[] _tokenDelimiterCache;
 
-        protected SimpleCommandParser(string commandPrefix, string tokenDelimiter)
+        protected SimpleCommandParser()
         {
-            _commandPrefix = commandPrefix;
-            // TODO: Clean below if unused
-            //_tokenDelimiter = tokenDelimiter;
-            _tokenDelimiterCache = new[] { tokenDelimiter };
         }
 
-        /// <summary>
-        ///     Checks the sanity of the command message.
-        /// </summary>
-        /// <param name="message">Chat message to check.</param>
-        /// <returns>
-        ///     <see langword="false"/> if message is null, shorter than the minimum
-        ///     allowed command length, or doesn't start with the correct command prefix.
-        ///     Otherwise <see langword="true"/>
-        /// </returns>
-        protected virtual bool CheckMessageSanity(string message)
+        public SimpleCommandParser(string commandPrefix, string tokenDelimiter)
         {
-            // if someone wants to extend this...who am I to stop you?
-            if (message == null)
-            {
-                return false;
-            }
-            if (message.Length < _commandPrefix.Length + 1)
-            {
-                return false;
-            }
-            if (!message.StartsWith(_commandPrefix))
-            {
-                return false;
-            }
-            return true;
+            _commandPrefix = commandPrefix;
+            _tokenDelimiterCache = new[] { tokenDelimiter };
         }
 
         /// <summary>
@@ -69,6 +45,23 @@ namespace Boson.Commands
             string[] tokens = untokenizedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None);
             command = tokens;
 
+            return true;
+        }
+
+        private bool CheckMessageSanity(string message)
+        {
+            if (message == null)
+            {
+                return false;
+            }
+            if (message.Length < _commandPrefix.Length + 1)
+            {
+                return false;
+            }
+            if (!message.StartsWith(_commandPrefix))
+            {
+                return false;
+            }
             return true;
         }
     }
