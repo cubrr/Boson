@@ -23,7 +23,7 @@ using InfinityScript;
 
 namespace Boson
 {
-    internal struct OnSayParameters
+    public struct OnSayParameters
     {
         public Entity Caller { get; private set; }
 

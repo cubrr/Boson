@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Boson.Commands
 {
-    internal interface ICommand
+    public interface ICommand
     {
         string Name { get; }
 

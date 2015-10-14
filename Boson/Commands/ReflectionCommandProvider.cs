@@ -24,7 +24,7 @@ using InfinityScript;
 
 namespace Boson.Commands
 {
-    internal class ReflectionCommandProvider : ICommandProvider
+    public class ReflectionCommandProvider : ICommandProvider
     {
         private static readonly Func<Type, bool> CommandTypeFilter =
             t => typeof(ICommand).IsAssignableFrom(t)

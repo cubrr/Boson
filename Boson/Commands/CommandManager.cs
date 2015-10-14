@@ -24,7 +24,7 @@ using InfinityScript;
 
 namespace Boson.Commands
 {
-    internal class CommandManager : ICommandManager
+    public class CommandManager : ICommandManager
     {
         private readonly IDictionary<string, ICommand> _commands;
 
