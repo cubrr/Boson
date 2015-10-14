@@ -50,6 +50,7 @@
     <Compile Include="Commands\ReflectionCommandProvider.cs" />
     <Compile Include="Commands\SimpleCommandParser.cs" />
     <Compile Include="BosonAdmin.cs" />
+    <Compile Include="OnSayParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
