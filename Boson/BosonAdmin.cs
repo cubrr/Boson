@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using InfinityScript;
 using Boson.Commands;
@@ -10,12 +11,11 @@ namespace Boson
 {
     public class BosonAdmin : BaseScript
     {
-        // ReSharper disable once FieldCanBeMadeReadOnly.Local
-        private ICommandParser _commandParser;
+        private readonly ICommandParser _commandParser = new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " ");
 
         public BosonAdmin()
         {
-            _commandParser = new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " ");
+            
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
@@ -30,6 +30,23 @@ namespace Boson
             }
             Utilities.RawSayAll("No command detected.");
             return EventEat.EatNone;
+        }
+    }    
+
+    internal struct OnSayParameters
+    {
+        public Entity Caller { get; private set; }
+
+        public BaseScript.ChatType ChatType { get; private set; }
+
+        public ICollection<string> Arguments { get; private set; }
+
+        public OnSayParameters(Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
+            : this()
+        {
+            Caller = caller;
+            ChatType = chatType;
+            Arguments = args;
         }
     }
 }
