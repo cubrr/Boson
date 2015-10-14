@@ -42,9 +42,4 @@ namespace Boson.Commands
             }
         }
     }
-
-    internal interface ICommandManager
-    {
-        void Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
-    }
 }
