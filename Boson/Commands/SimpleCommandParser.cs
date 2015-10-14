@@ -17,14 +17,15 @@
 
 using System;
 using System.Collections.Generic;
+using InfinityScript;
 
 namespace Boson.Commands
 {
     /// <summary>
-    /// Simple command parser which parses commands prefixed with the provided
+    /// Simple command parser which parses case-insensitive commands prefixed with the provided
     /// symbol and parameters separated with the token delimiter.
     /// </summary>
-    internal class SimpleCommandParser : ICommandParser
+    public class SimpleCommandParser : ICommandParser
     {
         private readonly string _commandPrefix;
 
@@ -39,6 +40,12 @@ namespace Boson.Commands
 
         public SimpleCommandParser(string commandPrefix, string tokenDelimiter)
         {
+            if (String.IsNullOrEmpty(commandPrefix))
+                throw new ArgumentNullException("commandPrefix");
+            if (String.IsNullOrEmpty(tokenDelimiter))
+                throw new ArgumentNullException("tokenDelimiter");
+            // TODO: Figure out max length of chat message. Neither prefix nor delimiter can be longer than max - 1.
+            
             _commandPrefix = commandPrefix;
             _tokenDelimiterCache = new[] { tokenDelimiter };
         }
@@ -64,7 +71,7 @@ namespace Boson.Commands
             string untokenizedMessage = message.Substring(_commandPrefix.Length);
             var tokens = new List<string>(untokenizedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None));
 
-            command = tokens[0];
+            command = tokens[0].ToLower();
             tokens.RemoveAt(0);
             arguments = tokens;
 
