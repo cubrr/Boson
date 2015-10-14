@@ -1,12 +1,13 @@
-﻿// Boson - TeknoMW3 Administrative Plugin
+﻿// This file is a part of Boson - an administrative plugin for TeknoMW3
 // Copyright © 2015 cubrr (jay@thecuber.org)
-// 
-// This program is free software: you can redistribute it and/or modify
+// Uses InfinityScript, Copyright © 2012 NTA
+//
+// Boson is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // 
-// This program is distributed in the hope that it will be useful,
+// Boson is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
@@ -37,7 +38,6 @@ namespace Boson.Commands
             ICommand command;
             if (!_commands.TryGetValue(commandName, out command))
             {
-                // TODO: 
                 Utilities.RawSayTo(onSayParams.Caller, "Command " + commandName + " not recognized!");
             }
         }
