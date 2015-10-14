@@ -7,8 +7,6 @@ namespace Boson.Commands
 {
     internal interface ICommandProvider
     {
-        IDictionary<string, ICommand> Commands { get; }
-
-        void LoadCommands();
+        IDictionary<string, ICommand> GetCommands();
     }
 }

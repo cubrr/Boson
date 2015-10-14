@@ -12,6 +12,7 @@ namespace Boson
     public class BosonAdmin : BaseScript
     {
         private readonly ICommandParser _commandParser = new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " ");
+        private readonly CommandManager _commandManager = new CommandManager(new ReflectionCommandProvider(Assembly.GetExecutingAssembly()));
 
         public BosonAdmin()
         {
@@ -21,14 +22,16 @@ namespace Boson
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
             string command;
-            ICollection<string> arguments;
+            IList<string> arguments;
 
             if (_commandParser.TryParse(message, out command, out arguments))
             {
+#if DEBUG
                 Utilities.RawSayAll("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
+#endif
+                
                 return EventEat.EatScript;
             }
-            Utilities.RawSayAll("No command detected.");
             return EventEat.EatNone;
         }
     }    

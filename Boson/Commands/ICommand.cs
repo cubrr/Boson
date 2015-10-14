@@ -11,8 +11,8 @@ namespace Boson.Commands
 
         IEnumerable<string> Aliases { get; }
 
-        void Invoke(OnSayParameters context);
+        void Invoke(IList<string> commandParams, OnSayParameters context);
 
-        void PrintHelp(OnSayParameters context);
+        void PrintHelp(IList<string> commandParams, OnSayParameters context);
     }
 }

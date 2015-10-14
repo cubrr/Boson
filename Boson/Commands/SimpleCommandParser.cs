@@ -34,7 +34,7 @@ namespace Boson.Commands
         /// <param name="command">Parsed command.</param>
         /// <param name="arguments">Parsed command arguments.</param>
         /// <returns>True if parsing succeeded, otherwise false.</returns>
-        public virtual bool TryParse(string message, out string command, out ICollection<string> arguments)
+        public virtual bool TryParse(string message, out string command, out IList<string> arguments)
         {
             command = null;
             arguments = null;
