@@ -56,19 +56,10 @@ namespace Boson.Commands
 
         private bool CheckMessageSanity(string message)
         {
-            if (message == null)
-            {
-                return false;
-            }
-            if (message.Length < _commandPrefix.Length + 1)
-            {
-                return false;
-            }
-            if (!message.StartsWith(_commandPrefix))
-            {
-                return false;
-            }
-            return true;
+            bool ret = message != null
+                       && message.Length >= _commandPrefix.Length + 1
+                       && message.StartsWith(_commandPrefix);
+            return ret;
         }
     }
 }
