@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with Boson.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
@@ -24,60 +24,106 @@ using InfinityScript;
 
 namespace Boson.Commands
 {
+    /// <summary>
+    /// Loads and provides commands from assemblies with reflection.
+    /// Command names are converted to lower case.
+    /// </summary>
     public class ReflectionCommandProvider : ICommandProvider
     {
-        private static readonly Func<Type, bool> CommandTypeFilter =
-            t => typeof(ICommand).IsAssignableFrom(t)
-                 && !t.IsAbstract
-                 && !t.IsInterface
-                 && !t.IsGenericType;
+        private readonly IEnumerable<Assembly> _sourceAssemblies;
 
-        private readonly Assembly[] _sourceAssemblies;
+        protected ReflectionCommandProvider()
+        {
+        }
 
         public ReflectionCommandProvider(params Assembly[] sourceAssemblies)
         {
-            _sourceAssemblies = sourceAssemblies;
+            if (sourceAssemblies == null
+                || sourceAssemblies.Length == 0
+                || sourceAssemblies.Any(a => a == null))
+            {
+                throw new ArgumentNullException("sourceAssemblies", "Null assemblies are not allowed.");
+            }
+
+            List<Assembly> distinctAssemblies = sourceAssemblies.Distinct().ToList();
+            int removedDuplicates = sourceAssemblies.Length - distinctAssemblies.Count;
+
+            if (removedDuplicates > 0)
+            {
+                string assemblyWord = removedDuplicates == 1 ? "assembly" : "assemblies";
+                Log.Write(LogLevel.Warning,
+                          "Filtered out " + removedDuplicates + " duplicate " + assemblyWord + "!");
+            }
+
+            _sourceAssemblies = distinctAssemblies;
+        }
+
+        /// <summary>
+        /// Predicate used to find compatible, ICommand-implementing
+        /// classes.
+        /// </summary>
+        protected virtual Func<Type, bool> CommandTypeFilter
+        {
+            get
+            {
+                return t => typeof(ICommand).IsAssignableFrom(t)
+                            && !t.IsAbstract
+                            && !t.IsInterface
+                            && !t.IsGenericType;
+            }
+        }
+
+        /// <summary>
+        /// Maximum amount of exceptions that can be thrown while
+        /// constructing commands from an assembly before cancelling
+        /// further command construction from that assembly.
+        /// </summary>
+        protected virtual int MaxCommandAssemblyExceptions
+        {
+            get { return 3; }
         }
 
         public IDictionary<string, ICommand> GetCommands()
         {
-            var commands = new Dictionary<string, ICommand>();
+            var dictionary = new Dictionary<string, ICommand>();
+            foreach (Assembly assembly in _sourceAssemblies)
+            {
+                ConstructCommands(dictionary, assembly);
+            }
+            return dictionary;
+        }
+
+        private void ConstructCommands(IDictionary<string, ICommand> targetDictionary, Assembly assembly)
+        {
             int exceptionCount = 0;
 
-            foreach (Type t in _sourceAssemblies.SelectMany(GetAssemblyCommands))
+            foreach (Type type in GetAssemblyCommands(assembly))
             {
                 try
                 {
-                    var commandInstance = (ICommand)Activator.CreateInstance(t);
-                    commands[commandInstance.Name] = commandInstance;
-
+                    var commandInstance = (ICommand)Activator.CreateInstance(type);
+                    AddCommand(targetDictionary, commandInstance.Name, commandInstance);
                     foreach (string alias in commandInstance.Aliases)
                     {
-                        if (commands.ContainsKey(alias))
-                        {
-                            Log.Error("WARNING: Existing command \"{0}\" overwritten by identical alias of command \"{1}\"!",
-                                      alias, commandInstance.Name);
-                        }
-                        commands[alias] = commandInstance;
+                        AddCommand(targetDictionary, alias, commandInstance);
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (exceptionCount > 5)
+                    if (exceptionCount >= MaxCommandAssemblyExceptions)
                     {
-                        Log.Error("Exceeded the limit of {0} exceptions while creating command instances! Aborting.",
-                                  exceptionCount);
+                        Log.Error("Exceeded the limit of {0} exceptions while creating command "
+                                  + "instances! Cancelling further command discovery from assembly.",
+                                  MaxCommandAssemblyExceptions);
                         break;
                     }
                     ++exceptionCount;
-                    Log.Error("Exception while creating instance of command [{0}]: {1}", t, ex);
+                    Log.Error("Exception while creating instance of command [{0}]! Exception: {1}", type, ex);
                 }
             }
-
-            return commands;
         }
 
-        private static IEnumerable<Type> GetAssemblyCommands(Assembly assembly)
+        private IEnumerable<Type> GetAssemblyCommands(Assembly assembly)
         {
             Log.Info("Loading commands from assembly: " + assembly);
 
@@ -91,6 +137,21 @@ namespace Boson.Commands
                 Log.Error("Exception while loading command types from assembly! " + ex);
                 return new Type[0];
             }
+        }
+
+        private void AddCommand(IDictionary<string, ICommand> dict, string key, ICommand command)
+        {
+            key = key.ToLower();
+            ICommand existingInstance;
+
+            if (dict.TryGetValue(key, out existingInstance))
+            {
+                Log.Write(LogLevel.Warning,
+                          "Existing command {0} [{1}] overwritten by "
+                          + "identically named or aliased [{2}]!",
+                          key, existingInstance.GetType(), command.GetType());
+            }
+            dict[key] = command;
         }
     }
 }
