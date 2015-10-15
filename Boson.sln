@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boson", "Boson\Boson.csproj", "{3BB77C43-C803-4B48-9B4C-209DCB1FD522}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boson.Tests", "Boson.Tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{3C6E0F46-98C3-4066-B7FC-CAA9981CFE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseNoticeEnforcer", "Utilities\LicenseNoticeEnforcer\LicenseNoticeEnforcer.csproj", "{2016D156-3539-4212-AB88-8D09A1FAB3CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LicenseNoticeHelper", "Utilities\LicenseNoticeHelper\LicenseNoticeHelper.csproj", "{2016D156-3539-4212-AB88-8D09A1FAB3CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
