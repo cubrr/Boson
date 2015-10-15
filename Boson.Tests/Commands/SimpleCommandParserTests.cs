@@ -19,6 +19,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Boson.Commands;
+using Boson.Tests.Commands.Mock;
+
+// ReSharper disable All
 
 namespace Boson.Tests.Commands
 {
@@ -28,6 +31,12 @@ namespace Boson.Tests.Commands
         [TestClass]
         public class Constructors
         {
+            [TestMethod]
+            public void ParameterlessConstructor_NoException()
+            {
+                new SimpleCommandParserDerivingMock();
+            }
+
             [TestMethod]
             [ExpectedException(typeof(ArgumentNullException))]
             public void NullPrefix_ThrowsException()
@@ -69,13 +78,13 @@ namespace Boson.Tests.Commands
             }
 
             [TestMethod]
-            public void OnlyWhiteSpaceSingleCharacterParameters_Work()
+            public void WhiteSpaceOnlySingleCharacterParameters_Work()
             {
                 new SimpleCommandParser(" ", " ");
             }
 
             [TestMethod]
-            public void OnlyWhiteSpaceMultiCharacterParameters_Work()
+            public void WhiteSpaceOnlyMultiCharacterParameters_Work()
             {
                 new SimpleCommandParser("    ", "     ");
             }
@@ -90,7 +99,7 @@ namespace Boson.Tests.Commands
             private const string ParserDelimiter = " ";
             private readonly string[] _commands = new[]
             {
-                "s", "test", "debug", "superman", "kick", "ban", "ac130superdupercoolparty"
+                "!", "!!", "s", "test", "debug", "superman", "kick", "ban", "ac130superdupercoolparty", "äiköåÖöãéèô"
             };
 
             private SimpleCommandParser _parser;
@@ -113,7 +122,7 @@ namespace Boson.Tests.Commands
             [TestMethod]
             public void EmptyMessage_ReturnsFalse()
             {
-                bool result = _parser.TryParse("", out _outCommand, out _outParams);
+                bool result = _parser.TryParse(String.Empty, out _outCommand, out _outParams);
                 Assert.IsFalse(result);
             }
 
@@ -143,13 +152,13 @@ namespace Boson.Tests.Commands
             }
 
             [TestMethod]
-            public void CommandsWithoutArgs_GetParsed()
+            public void CommandsWithoutArgs_GetParsedCorrectly()
             {
                 foreach (string command in _commands)
                 {
                     string prefixedCommand = ParserPrefix + command;
                     bool result = _parser.TryParse(prefixedCommand, out _outCommand, out _outParams);
-                    Assert.AreEqual(command, _outCommand);
+                    Assert.AreEqual(command, _outCommand, true);
                 }
             }
 
@@ -163,6 +172,55 @@ namespace Boson.Tests.Commands
                                                  CommandArgument1);
                     bool result = _parser.TryParse(message, out _outCommand, out _outParams);
                     Assert.IsTrue(result);
+                }
+            }
+
+            [TestMethod]
+            public void CommandsWithOneArgument_GetParsedCorrectly()
+            {
+                foreach (string command in _commands)
+                {
+                    string message = String.Join(ParserDelimiter,
+                                                 ParserPrefix + command,
+                                                 CommandArgument1);
+                    bool result = _parser.TryParse(message, out _outCommand, out _outParams);
+                    Assert.AreEqual(1, _outParams.Count);
+                    Assert.AreEqual(CommandArgument1, _outParams[0]);
+                }
+            }
+
+            [TestMethod]
+            public void CommandsWithManyArguments_GetParsedCorrectly()
+            {
+                foreach (string command in _commands)
+                {
+                    string message = String.Join(ParserDelimiter,
+                                                 ParserPrefix + command,
+                                                 CommandArgument1,
+                                                 CommandArgument2);
+                    bool result = _parser.TryParse(message, out _outCommand, out _outParams);
+                    Assert.AreEqual(2, _outParams.Count);
+                    Assert.AreEqual(CommandArgument1, _outParams[0]);
+                    Assert.AreEqual(CommandArgument2, _outParams[1]);
+                }
+            }
+
+            [TestMethod]
+            public void CommandsWithManyArguments_EverythingGetsParsedCorrectly()
+            {
+                foreach (string command in _commands)
+                {
+                    string message = String.Join(ParserDelimiter,
+                                                 ParserPrefix + command,
+                                                 CommandArgument1,
+                                                 CommandArgument2,
+                                                 "");
+                    bool result = _parser.TryParse(message, out _outCommand, out _outParams);
+                    Assert.AreEqual(3, _outParams.Count);
+                    Assert.AreEqual(command, _outCommand, true);
+                    Assert.AreEqual(CommandArgument1, _outParams[0]);
+                    Assert.AreEqual(CommandArgument2, _outParams[1]);
+                    Assert.AreEqual("", _outParams[2]);
                 }
             }
         }
