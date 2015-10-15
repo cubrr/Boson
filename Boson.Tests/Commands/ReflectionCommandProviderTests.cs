@@ -35,11 +35,11 @@ namespace Boson.Tests.Commands
         [TestClass]
         public class Constructors
         {
-            private DebugLogListener _logListener;
+            private TestLogListener _logListener;
 
             public Constructors()
             {
-                _logListener = new DebugLogListener();
+                _logListener = new TestLogListener();
                 Log.Initialize(LogLevel.All);
                 Log.AddListener(_logListener);
             }
@@ -89,20 +89,15 @@ namespace Boson.Tests.Commands
         [TestClass]
         public class GetCommandsMethod
         {
-            private DebugLogListener _logListener;
+            private TestLogListener _logListener;
 
             private ReflectionCommandProvider _provider;
 
             public GetCommandsMethod()
             {
-                _logListener = new DebugLogListener();
+                _logListener = new TestLogListener();
                 Log.Initialize(LogLevel.All);
                 Log.AddListener(_logListener);
-            }
-
-            [TestInitialize]
-            public void TestInitialize()
-            {
                 _provider = new ReflectionCommandProvider(Assembly.GetExecutingAssembly());
             }
 

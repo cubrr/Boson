@@ -21,8 +21,10 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using InfinityScript;
 using Boson.Commands;
+using Boson.Utility;
 
 namespace Boson
 {
@@ -34,6 +36,13 @@ namespace Boson
         private readonly CommandManager _commandManager =
             new CommandManager(new ReflectionCommandProvider(Assembly.GetExecutingAssembly()));
 
+        public BosonAdmin()
+        {
+#if DEBUG
+            Log.AddListener(new DebugLogListener());
+#endif
+        }
+
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
             string command;
@@ -41,7 +50,9 @@ namespace Boson
 
             if (_commandParser.TryParse(message, out command, out arguments))
             {
-                Utilities.RawSayAll("debug: Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));               
+                Log.Debug("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
+                var parameters = new OnSayParameters(this, player, type, arguments);
+                _commandManager.Invoke(command, arguments, parameters);
                 return EventEat.EatScript;
             }
             return EventEat.EatNone;

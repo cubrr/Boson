@@ -16,32 +16,35 @@
 // along with Boson.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using InfinityScript;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable All
 
-namespace Boson.Commands
+namespace Boson.Tests
 {
-    public class CommandManager : ICommandManager
+    [TestClass]
+    public class BosonAdminTests
     {
-        private readonly IDictionary<string, ICommand> _commands;
-
-        public CommandManager(ICommandProvider provider)
+        [TestClass]
+        public class Constructors
         {
-            _commands = provider.GetCommands();
-        }
+            private TestLogListener _logListener;
 
-        public void Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams)
-        {
-            ICommand command;
-            if (!_commands.TryGetValue(commandName, out command))
+            public Constructors()
             {
-                Utilities.RawSayTo(onSayParams.Caller, "Command " + commandName + " not recognized!");
+                _logListener = new TestLogListener();
+                Log.Initialize(LogLevel.All);
+                Log.AddListener(_logListener);
             }
-            // TODO: Level system and authentication
-            command.Invoke(commandParams, onSayParams);
+
+            [TestMethod]
+            public void DefaultConstructorUsed_NoException()
+            {
+                new BosonAdmin();
+            }
         }
     }
 }

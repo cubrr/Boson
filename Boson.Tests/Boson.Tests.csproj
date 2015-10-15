@@ -57,13 +57,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BosonAdminTests.cs" />
     <Compile Include="Commands\Mock\MockCommands.cs" />
     <Compile Include="Commands\Mock\MockCommandsWithExceptions.cs" />
     <Compile Include="Commands\Mock\ReflectionCommandProviderDerivingMock.cs" />
     <Compile Include="Commands\Mock\SimpleCommandParserDerivingMock.cs" />
     <Compile Include="Commands\ReflectionCommandProviderTests.cs" />
     <Compile Include="Commands\SimpleCommandParserTests.cs" />
-    <Compile Include="DebugLogListener.cs" />
+    <Compile Include="TestLogListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

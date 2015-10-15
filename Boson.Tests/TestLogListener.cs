@@ -24,11 +24,11 @@ using System.Diagnostics;
 
 namespace Boson.Tests
 {
-    public class DebugLogListener : ILogListener
+    public class TestLogListener : ILogListener
     {
         public List<LoggedMessage> Messages { get; private set; }
 
-        public DebugLogListener()
+        public TestLogListener()
         {
             Messages = new List<LoggedMessage>();
         }

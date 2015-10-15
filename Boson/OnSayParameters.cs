@@ -25,15 +25,18 @@ namespace Boson
 {
     public struct OnSayParameters
     {
+        public BaseScript BaseScript { get; private set; }
+
         public Entity Caller { get; private set; }
 
         public BaseScript.ChatType ChatType { get; private set; }
 
         public ICollection<string> Arguments { get; private set; }
 
-        public OnSayParameters(Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
+        public OnSayParameters(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
             : this()
         {
+            BaseScript = baseScript;
             Caller = caller;
             ChatType = chatType;
             Arguments = args;

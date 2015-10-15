@@ -106,8 +106,7 @@ namespace Boson.Tests.Commands
             private string _outCommand;
             private IList<string> _outParams;
 
-            [TestInitialize]
-            public void TryParseInitialization()
+            public TryParseMethod()
             {
                 _parser = new SimpleCommandParser(ParserPrefix, ParserDelimiter);
             }
