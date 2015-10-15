@@ -1,4 +1,4 @@
-﻿// This file is a part of Boson - an administrative plugin for TeknoMW3
+// This file is a part of Boson - an administrative plugin for TeknoMW3
 // Copyright © 2015 cubrr (jay@thecuber.org)
 // Uses InfinityScript, Copyright © 2012 NTA
 //
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// along with Boson.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
