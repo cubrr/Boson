@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfinityScript;
 
 namespace Boson.Commands
 {
@@ -28,7 +29,7 @@ namespace Boson.Commands
 
         IEnumerable<string> Aliases { get; }
 
-        void Invoke(IList<string> commandParams, OnSayParameters context);
+        BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context);
 
         void PrintHelp(IList<string> commandParams, OnSayParameters context);
     }

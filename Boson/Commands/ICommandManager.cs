@@ -19,11 +19,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfinityScript;
 
 namespace Boson.Commands
 {
     public interface ICommandManager
     {
-        void Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
+        BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
     }
 }

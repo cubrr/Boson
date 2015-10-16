@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Boson.Commands;
+using InfinityScript;
 
 namespace Boson.Tests.Commands.Mock
 {
@@ -37,7 +38,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand1"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }
@@ -60,7 +61,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand2"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }
@@ -83,7 +84,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand2"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }
@@ -106,7 +107,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand4"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }
@@ -129,7 +130,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand5"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }
@@ -152,7 +153,7 @@ namespace Boson.Tests.Commands.Mock
                 get { return "ThrowConstructorCommand6"; }
             }
 
-            public override void Invoke(IList<string> commandParams, OnSayParameters context)
+            public override BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context)
             {
                 throw new NotImplementedException();
             }

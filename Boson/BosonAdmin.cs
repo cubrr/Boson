@@ -30,17 +30,23 @@ namespace Boson
 {
     public class BosonAdmin : BaseScript
     {
-        private readonly ICommandParser _commandParser =
-            new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " ");
+        private readonly ICommandParser _commandParser;
 
-        private readonly CommandManager _commandManager =
-            new CommandManager(new ReflectionCommandProvider(Assembly.GetExecutingAssembly()));
+        private readonly ICommandManager _commandManager;
 
         public BosonAdmin()
+            : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
+                   new CommandManager(new ReflectionCommandProvider(Assembly.GetExecutingAssembly())))
         {
 #if DEBUG
             Log.AddListener(new DebugLogListener());
 #endif
+        }
+
+        public BosonAdmin(ICommandParser parser, ICommandManager manager)
+        {
+            _commandParser = parser;
+            _commandManager = manager;
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
@@ -50,10 +56,9 @@ namespace Boson
 
             if (_commandParser.TryParse(message, out command, out arguments))
             {
-                Log.Debug("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
+                //Log.Debug("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
                 var parameters = new OnSayParameters(this, player, type, arguments);
-                _commandManager.Invoke(command, arguments, parameters);
-                return EventEat.EatScript;
+                return _commandManager.Invoke(command, arguments, parameters);
             }
             return EventEat.EatNone;
         }

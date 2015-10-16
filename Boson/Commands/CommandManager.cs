@@ -33,7 +33,7 @@ namespace Boson.Commands
             _commands = provider.GetCommands();
         }
 
-        public void Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams)
+        public BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams)
         {
             ICommand command;
             if (!_commands.TryGetValue(commandName, out command))
@@ -41,7 +41,14 @@ namespace Boson.Commands
                 Utilities.RawSayTo(onSayParams.Caller, "Command " + commandName + " not recognized!");
             }
             // TODO: Level system and authentication
-            command.Invoke(commandParams, onSayParams);
+
+            if (command != null)
+            {
+                return command.Invoke(commandParams, onSayParams);
+            }
+
+            Log.Error("Null command invoked: {0}", commandName);
+            return BaseScript.EventEat.EatScript;
         }
     }
 }
