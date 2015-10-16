@@ -28,15 +28,15 @@ namespace Boson.Commands
     /// Loads and provides commands from assemblies with reflection.
     /// Command names are converted to lower case.
     /// </summary>
-    public class ReflectionCommandProvider : ICommandProvider
+    public class ReflectionProvider : ICommandProvider
     {
         private readonly IEnumerable<Assembly> _sourceAssemblies;
 
-        protected ReflectionCommandProvider()
+        protected ReflectionProvider()
         {
         }
 
-        public ReflectionCommandProvider(params Assembly[] sourceAssemblies)
+        public ReflectionProvider(params Assembly[] sourceAssemblies)
         {
             if (sourceAssemblies == null
                 || sourceAssemblies.Length == 0

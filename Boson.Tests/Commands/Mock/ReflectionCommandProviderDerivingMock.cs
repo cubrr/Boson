@@ -24,7 +24,7 @@ using Boson.Commands;
 namespace Boson.Tests.Commands.Mock
 {
     public class ReflectionCommandProviderDerivingMock
-        : ReflectionCommandProvider
+        : ReflectionProvider
     {
         /// <summary>
         /// Tests the protected constructor

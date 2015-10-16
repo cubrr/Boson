@@ -46,6 +46,29 @@ namespace Boson.Tests
             {
                 new BosonAdmin();
             }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void NullCommandParserPassed_ThrowsException()
+            {
+                new BosonAdmin(null,
+                               new DummyCommandManager(BaseScript.EventEat.EatNone));
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentNullException))]
+            public void NullCommandManagerPassed_ThrowsException()
+            {
+                new BosonAdmin(new DummyCommandParser(true),
+                               null);
+            }
+
+            [TestMethod]
+            public void SecondaryConstructorUsed_NoException()
+            {
+                new BosonAdmin(new DummyCommandParser(true),
+                               new DummyCommandManager(BaseScript.EventEat.EatNone));
+            }
         }
 
         [TestClass]

@@ -36,7 +36,7 @@ namespace Boson
 
         public BosonAdmin()
             : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
-                   new CommandManager(new ReflectionCommandProvider(Assembly.GetExecutingAssembly())))
+                   new CommandManager(new ReflectionProvider(Assembly.GetExecutingAssembly())))
         {
 #if DEBUG
             Log.AddListener(new DebugLogListener());
@@ -45,6 +45,11 @@ namespace Boson
 
         public BosonAdmin(ICommandParser parser, ICommandManager manager)
         {
+            if (parser == null)
+                throw new ArgumentNullException("parser");
+            if (manager == null)
+                throw new ArgumentNullException("manager");
+
             _commandParser = parser;
             _commandManager = manager;
         }
