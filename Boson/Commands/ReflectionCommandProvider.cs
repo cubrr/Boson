@@ -105,12 +105,18 @@ namespace Boson.Commands
 
         /// <summary>
         /// Scans the source assemblies for commands and returns a
-        /// dictionary where the key is the 
+        /// dictionary where the key is the command's name and the
+        /// value is the ICommand itself.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// A dictionary where the key is the command's name and the
+        /// value is the ICommand itself.
+        /// </returns>
         public IDictionary<string, ICommand> GetCommands()
         {
-            var dictionary = new Dictionary<string, ICommand>();
+            // TODO: Change the return type to IEnumerable<ICommand> and let the consumer deal with the dictionary stuff?
+            // Command names should be processed ignoring the case
+            var dictionary = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
             foreach (Assembly assembly in _sourceAssemblies)
             {
                 FindAndConstructCommands(dictionary, assembly);
@@ -169,7 +175,6 @@ namespace Boson.Commands
 
         private void AddCommand(IDictionary<string, ICommand> dict, string key, ICommand command)
         {
-            key = key.ToLower();
             ICommand existingInstance;
 
             if (dict.TryGetValue(key, out existingInstance))
