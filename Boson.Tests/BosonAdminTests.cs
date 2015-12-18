@@ -20,6 +20,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Boson.Tests.Commands.Mock;
+using Boson.Api.Commands;
 using InfinityScript;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable All
@@ -52,7 +53,7 @@ namespace Boson.Tests
             public void NullCommandParserPassed_ThrowsException()
             {
                 new BosonAdmin(null,
-                               new DummyCommandManager(BaseScript.EventEat.EatNone));
+                               new DummyCommandRepository(true, null));
             }
 
             [TestMethod]
@@ -67,54 +68,7 @@ namespace Boson.Tests
             public void SecondaryConstructorUsed_NoException()
             {
                 new BosonAdmin(new DummyCommandParser(true),
-                               new DummyCommandManager(BaseScript.EventEat.EatNone));
-            }
-        }
-
-        [TestClass]
-        public class OnSay3Method
-        {
-            private TestLogListener _logListener;
-
-            private Entity _testEntity;
-
-            private BaseScript.ChatType _testChatType;
-
-            private string _testEntityName;
-
-            public OnSay3Method()
-            {
-                _logListener = new TestLogListener();
-                Log.Initialize(LogLevel.All);
-                Log.AddListener(_logListener);
-            }
-
-            [TestInitialize]
-            public void TestInitialize()
-            {
-                _testEntity = Entity.GetEntity(0);
-                _testChatType = BaseScript.ChatType.All;
-                _testEntityName = "toastbox";
-            }
-
-            [TestMethod]
-            public void FailedCommandParse_ReturnsEatNone()
-            {
-                var instance = new BosonAdmin(new DummyCommandParser(returnValue: false),
-                                              new DummyCommandManager(returnValue: BaseScript.EventEat.EatScript));
-                string message = "";
-                BaseScript.EventEat result = instance.OnSay3(_testEntity, _testChatType, _testEntityName, ref message);
-                Assert.AreEqual<BaseScript.EventEat>(BaseScript.EventEat.EatNone, result);
-            }
-
-            [TestMethod]
-            public void SuccessfulCommandParse_ReturnsCorrectly()
-            {
-                var instance = new BosonAdmin(new DummyCommandParser(returnValue: true),
-                                              new DummyCommandManager(returnValue: BaseScript.EventEat.EatScript));
-                string message = "";
-                BaseScript.EventEat result = instance.OnSay3(_testEntity, _testChatType, _testEntityName, ref message);
-                Assert.AreEqual<BaseScript.EventEat>(BaseScript.EventEat.EatScript, result);
+                               new DummyCommandRepository(true, null));
             }
         }
     }

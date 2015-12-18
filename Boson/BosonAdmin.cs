@@ -34,18 +34,18 @@ namespace Boson
     {
         private readonly ICommandParser _commandParser;
 
-        private readonly ICommandManager _commandManager;
+        private readonly ICommandRepository _commandManager;
 
         public BosonAdmin()
             : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
-                   new CommandManager(new ReflectionProvider(Assembly.GetExecutingAssembly())))
+                   new CommandRepository(new ReflectionProvider(Assembly.GetExecutingAssembly())))
         {
 #if DEBUG
             Log.AddListener(new DebugLogListener());
 #endif
         }
 
-        public BosonAdmin(ICommandParser parser, ICommandManager manager)
+        public BosonAdmin(ICommandParser parser, ICommandRepository manager)
         {
             if (parser == null)
                 throw new ArgumentNullException("parser");
@@ -58,14 +58,15 @@ namespace Boson
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
-            string command;
+            string commandName;
             IList<string> arguments;
 
-            if (_commandParser.TryParse(message, out command, out arguments))
+            if (_commandParser.TryParse(message, out commandName, out arguments))
             {
                 //Log.Debug("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
-                var parameters = new OnSayParameters(this, player, type, arguments);
-                return _commandManager.Invoke(command, arguments, parameters);
+                //var parameters = new OnSayParameters(this, player, type, arguments);
+                ICommand command;
+                _commandManager.FindCommand(commandName, out command);
             }
             return EventEat.EatNone;
         }

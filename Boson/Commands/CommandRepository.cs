@@ -26,31 +26,18 @@ using Boson.Api.Commands;
 
 namespace Boson.Commands
 {
-    public class CommandManager : ICommandManager
+    public class CommandRepository : ICommandRepository
     {
         private readonly IDictionary<string, ICommand> _commands;
 
-        public CommandManager(ICommandProvider provider)
+        public CommandRepository(ICommandProvider provider)
         {
             _commands = provider.GetCommands();
         }
 
-        public BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams)
+        public bool FindCommand(string commandName, out ICommand command)
         {
-            ICommand command;
-            if (!_commands.TryGetValue(commandName, out command))
-            {
-                Utilities.RawSayTo(onSayParams.Caller, "Command " + commandName + " not recognized!");
-            }
-            // TODO: Level system and authentication
-
-            if (command != null)
-            {
-                return command.Invoke(commandParams, onSayParams);
-            }
-
-            Log.Error("Null command invoked: {0}", commandName);
-            return BaseScript.EventEat.EatScript;
+            return _commands.TryGetValue(commandName, out command);
         }
     }
 }

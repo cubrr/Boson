@@ -33,8 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InfinityScript">
-      <HintPath>..\Dependencies\InfinityScript.dll</HintPath>
+    <Reference Include="InfinityScript, Version=1.2.5767.2463, Culture=neutral, PublicKeyToken=98713b15ea221c09, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Games\MW3 Server\TeknoMW3 Server\InfinityScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandManager.cs" />
+    <Compile Include="Commands\ICommandRepository.cs" />
     <Compile Include="Commands\ICommandParser.cs" />
     <Compile Include="Commands\ICommandProvider.cs" />
     <Compile Include="OnSayParameters.cs" />

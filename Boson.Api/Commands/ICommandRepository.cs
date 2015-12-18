@@ -19,25 +19,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Boson.Commands;
 using InfinityScript;
-using Boson.Api;
-using Boson.Api.Commands;
 
-namespace Boson.Tests.Commands.Mock
+namespace Boson.Api.Commands
 {
-    public class DummyCommandManager : ICommandManager
+    public interface ICommandRepository
     {
-        private readonly BaseScript.EventEat _returnValue;
-
-        public DummyCommandManager(BaseScript.EventEat returnValue)
-        {
-            _returnValue = returnValue;
-        }
-
-        public BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams)
-        {
-            return _returnValue;
-        }
+        bool FindCommand(string commandName, out ICommand command);
+        //BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
     }
 }
