@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using InfinityScript;
 using Boson.Api;
 using Boson.Api.Commands;
+using InfinityScript;
 
 namespace Boson.Commands
 {
@@ -30,15 +30,24 @@ namespace Boson.Commands
     /// Loads and provides commands from assemblies with reflection.
     /// Command names are converted to lower case.
     /// </summary>
-    public class ReflectionProvider : ICommandProvider
+    public class ReflectionCommandProvider : ICommandProvider
     {
         private readonly IEnumerable<Assembly> _sourceAssemblies;
 
-        protected ReflectionProvider()
-        {
-        }
-
-        public ReflectionProvider(params Assembly[] sourceAssemblies)
+        /// <summary>
+        /// Initializes a new instance of the ReflectionCommandProvider class
+        /// and specifies a list of source assemblies to search for commands.
+        /// </summary>
+        /// <param name="sourceAssemblies">
+        /// List of source assemblies to search for commands.
+        /// </param>
+        /// <remarks>
+        ///     <note type="note">
+        ///     The specified assemblies are not scanned until <see cref="GetCommands"/>
+        ///     is called.
+        ///     </note>
+        /// </remarks>
+        public ReflectionCommandProvider(params Assembly[] sourceAssemblies)
         {
             if (sourceAssemblies == null
                 || sourceAssemblies.Length == 0
@@ -54,15 +63,24 @@ namespace Boson.Commands
             {
                 string assemblyWord = removedDuplicates == 1 ? "assembly" : "assemblies";
                 Log.Write(LogLevel.Warning,
-                          "Filtered out " + removedDuplicates + " duplicate " + assemblyWord + "!");
+                          "Filtered out {0} duplicate {1}!",
+                          removedDuplicates,
+                          assemblyWord);
             }
 
             _sourceAssemblies = distinctAssemblies;
         }
 
         /// <summary>
-        /// Predicate used to find compatible, ICommand-implementing
-        /// classes.
+        /// Initializes a new instance of the ReflectionCommandProvider class
+        /// without specifying a list of source assemblies to search for commands.
+        /// </summary>
+        protected ReflectionCommandProvider()
+        {
+        }
+
+        /// <summary>
+        /// Predicate used to match ICommands.
         /// </summary>
         protected virtual Func<Type, bool> CommandTypeFilter
         {
@@ -85,20 +103,28 @@ namespace Boson.Commands
             get { return 3; }
         }
 
+        /// <summary>
+        /// Scans the source assemblies for commands and returns a
+        /// dictionary where the key is the 
+        /// </summary>
+        /// <returns></returns>
         public IDictionary<string, ICommand> GetCommands()
         {
             var dictionary = new Dictionary<string, ICommand>();
             foreach (Assembly assembly in _sourceAssemblies)
             {
-                ConstructCommands(dictionary, assembly);
+                FindAndConstructCommands(dictionary, assembly);
             }
+
             return dictionary;
         }
 
-        private void ConstructCommands(IDictionary<string, ICommand> targetDictionary, Assembly assembly)
+        private void FindAndConstructCommands(IDictionary<string, ICommand> targetDictionary, Assembly assembly)
         {
-            int exceptionCount = 0;
+            if (targetDictionary == null)
+                throw new ArgumentNullException("targetDictionary");
 
+            int exceptionCount = 0;
             foreach (Type type in GetAssemblyCommands(assembly))
             {
                 try
@@ -149,10 +175,12 @@ namespace Boson.Commands
             if (dict.TryGetValue(key, out existingInstance))
             {
                 Log.Write(LogLevel.Warning,
-                          "Existing command {0} [{1}] overwritten by "
-                          + "identically named or aliased [{2}]!",
-                          key, existingInstance.GetType(), command.GetType());
+                          "Existing command {0} [{1}] replaced by identically named or aliased [{2}]!",
+                          key,
+                          existingInstance.GetType(),
+                          command.GetType());
             }
+
             dict[key] = command;
         }
     }

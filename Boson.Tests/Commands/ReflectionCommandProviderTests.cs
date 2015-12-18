@@ -56,30 +56,30 @@ namespace Boson.Tests.Commands
             [ExpectedException(typeof(ArgumentNullException))]
             public void SoloNullAssemblyArgument_ThrowsException()
             {
-                new ReflectionProvider(null);
+                new ReflectionCommandProvider(null);
             }
 
             [TestMethod]
             [ExpectedException(typeof(ArgumentNullException))]
             public void NullAssemblyArgument_ThrowsException()
             {
-                new ReflectionProvider(Assembly.GetExecutingAssembly(), null);
+                new ReflectionCommandProvider(Assembly.GetExecutingAssembly(), null);
             }
 
             [TestMethod]
             [ExpectedException(typeof(ArgumentNullException))]
             public void EmptyAssemblyListArgument_ThrowsException()
             {
-                new ReflectionProvider(new Assembly[10]);
+                new ReflectionCommandProvider(new Assembly[10]);
             }
 
             [TestMethod]
             public void DuplicateAssemblies_WritesLogWarning()
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                new ReflectionProvider(assembly, assembly);
+                new ReflectionCommandProvider(assembly, assembly);
 
-                string typeName = typeof(ReflectionProvider).Name;
+                string typeName = typeof(ReflectionCommandProvider).Name;
                 var m = _logListener.Messages.Last();
                 bool logMessageFound = m.LogLevel == LogLevel.Warning
                                        && m.Source == typeName + "::" + typeName
@@ -93,14 +93,14 @@ namespace Boson.Tests.Commands
         {
             private TestLogListener _logListener;
 
-            private ReflectionProvider _provider;
+            private ReflectionCommandProvider _provider;
 
             public GetCommandsMethod()
             {
                 _logListener = new TestLogListener();
                 Log.Initialize(LogLevel.All);
                 Log.AddListener(_logListener);
-                _provider = new ReflectionProvider(Assembly.GetExecutingAssembly());
+                _provider = new ReflectionCommandProvider(Assembly.GetExecutingAssembly());
             }
 
             [TestMethod]

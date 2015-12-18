@@ -38,7 +38,7 @@ namespace Boson
 
         public BosonAdmin()
             : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
-                   new CommandRepository(new ReflectionProvider(Assembly.GetExecutingAssembly())))
+                   new CommandRepository(new ReflectionCommandProvider(Assembly.GetExecutingAssembly())))
         {
 #if DEBUG
             Log.AddListener(new DebugLogListener());
