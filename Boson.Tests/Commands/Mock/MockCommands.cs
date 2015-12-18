@@ -21,6 +21,8 @@ using System.Linq;
 using System.Text;
 using Boson.Commands;
 using InfinityScript;
+using Boson.Api;
+using Boson.Api.Commands;
 
 namespace Boson.Tests.Commands.Mock
 {

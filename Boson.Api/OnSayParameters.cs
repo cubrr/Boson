@@ -21,16 +21,25 @@ using System.Linq;
 using System.Text;
 using InfinityScript;
 
-namespace Boson.Commands
+namespace Boson.Api
 {
-    public interface ICommand
+    public struct OnSayParameters
     {
-        string Name { get; }
+        public BaseScript BaseScript { get; private set; }
 
-        IEnumerable<string> Aliases { get; }
+        public Entity Caller { get; private set; }
 
-        BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context);
+        public BaseScript.ChatType ChatType { get; private set; }
 
-        void PrintHelp(IList<string> commandParams, OnSayParameters context);
+        public ICollection<string> Arguments { get; private set; }
+
+        public OnSayParameters(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
+            : this()
+        {
+            BaseScript = baseScript;
+            Caller = caller;
+            ChatType = chatType;
+            Arguments = args;
+        }
     }
 }

@@ -24,6 +24,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Boson.Commands;
 using Boson.Tests.Commands.Mock;
 using InfinityScript;
+using Boson.Api;
+using Boson.Api.Commands;
 // ReSharper disable All
 
 namespace Boson.Tests.Commands

@@ -76,8 +76,6 @@ namespace Boson.Tests
         {
             private TestLogListener _logListener;
 
-            private BosonAdmin _testInstance;
-
             private Entity _testEntity;
 
             private BaseScript.ChatType _testChatType;
@@ -94,7 +92,6 @@ namespace Boson.Tests
             [TestInitialize]
             public void TestInitialize()
             {
-                _testInstance = new BosonAdmin();
                 _testEntity = Entity.GetEntity(0);
                 _testChatType = BaseScript.ChatType.All;
                 _testEntityName = "toastbox";

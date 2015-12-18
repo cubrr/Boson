@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InfinityScript;
+using Boson.Api;
+using Boson.Api.Commands;
 
 namespace Boson.Commands
 {

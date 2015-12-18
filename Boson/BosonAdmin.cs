@@ -25,6 +25,8 @@ using System.Diagnostics;
 using InfinityScript;
 using Boson.Commands;
 using Boson.Utility;
+using Boson.Api;
+using Boson.Api.Commands;
 
 namespace Boson
 {

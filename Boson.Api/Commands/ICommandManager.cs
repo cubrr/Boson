@@ -19,14 +19,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using InfinityScript;
 
-namespace Boson.Commands
+namespace Boson.Api.Commands
 {
-    /// <summary>
-    /// Provides a mechanism for parsing command names and parameters from a chat message.
-    /// </summary>
-    public interface ICommandParser
+    public interface ICommandManager
     {
-        bool TryParse(string message, out string command, out IList<string> arguments);
+        BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
     }
 }

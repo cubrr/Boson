@@ -15,30 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Boson.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Boson.Commands;
-using Boson.Api;
-using Boson.Api.Commands;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-namespace Boson.Tests.Commands.Mock
-{
-    public class DummyCommandParser : ICommandParser
-    {
-        private readonly bool _returnValue;
-
-        public DummyCommandParser(bool returnValue)
-        {
-            _returnValue = returnValue;
-        }
-
-        public bool TryParse(string message, out string command, out IList<string> arguments)
-        {
-            command = null;
-            arguments = null;
-            return _returnValue;
-        }
-    }
-}
+[assembly: AssemblyTitle("Boson.Api")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Boson.Api")]
+[assembly: AssemblyCopyright("Copyright © 2015 cubrr")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("d60a5582-d976-4dc0-a9e4-c16f0485cb00")]
+[assembly: AssemblyVersion("0.2.*")]

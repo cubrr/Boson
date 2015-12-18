@@ -18,6 +18,8 @@
 using System;
 using System.Collections.Generic;
 using InfinityScript;
+using Boson.Api;
+using Boson.Api.Commands;
 
 namespace Boson.Commands
 {

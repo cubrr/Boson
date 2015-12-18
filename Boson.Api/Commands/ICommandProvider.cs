@@ -19,27 +19,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using InfinityScript;
 
-namespace Boson
+namespace Boson.Api.Commands
 {
-    public struct OnSayParameters
+    public interface ICommandProvider
     {
-        public BaseScript BaseScript { get; private set; }
-
-        public Entity Caller { get; private set; }
-
-        public BaseScript.ChatType ChatType { get; private set; }
-
-        public ICollection<string> Arguments { get; private set; }
-
-        public OnSayParameters(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
-            : this()
-        {
-            BaseScript = baseScript;
-            Caller = caller;
-            ChatType = chatType;
-            Arguments = args;
-        }
+        IDictionary<string, ICommand> GetCommands();
     }
 }

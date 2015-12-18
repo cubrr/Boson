@@ -21,10 +21,16 @@ using System.Linq;
 using System.Text;
 using InfinityScript;
 
-namespace Boson.Commands
+namespace Boson.Api.Commands
 {
-    public interface ICommandManager
+    public interface ICommand
     {
-        BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
+        string Name { get; }
+
+        IEnumerable<string> Aliases { get; }
+
+        BaseScript.EventEat Invoke(IList<string> commandParams, OnSayParameters context);
+
+        void PrintHelp(IList<string> commandParams, OnSayParameters context);
     }
 }
