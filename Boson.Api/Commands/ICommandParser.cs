@@ -27,6 +27,6 @@ namespace Boson.Api.Commands
     /// </summary>
     public interface ICommandParser
     {
-        bool TryParse(string message, out string command, out IList<string> arguments);
+        bool TryParse(string message, out string command, out ICollection<string> arguments);
     }
 }

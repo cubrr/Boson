@@ -59,7 +59,7 @@ namespace Boson
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
         {
             string commandName;
-            IList<string> arguments;
+            ICollection<string> arguments;
 
             if (!_commandParser.TryParse(message, out commandName, out arguments))
             {
