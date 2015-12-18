@@ -26,6 +26,5 @@ namespace Boson.Api.Commands
     public interface ICommandRepository
     {
         bool FindCommand(string commandName, out ICommand command);
-        //BaseScript.EventEat Invoke(string commandName, IList<string> commandParams, OnSayParameters onSayParams);
     }
 }

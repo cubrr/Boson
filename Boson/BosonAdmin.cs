@@ -61,12 +61,19 @@ namespace Boson
             string commandName;
             IList<string> arguments;
 
-            if (_commandParser.TryParse(message, out commandName, out arguments))
+            if (!_commandParser.TryParse(message, out commandName, out arguments))
             {
-                //Log.Debug("Command parsed: \"" + command + "\", arguments: " + String.Join(", ", arguments.Select(s => '"' + s + '"')));
-                //var parameters = new OnSayParameters(this, player, type, arguments);
-                ICommand command;
-                _commandManager.FindCommand(commandName, out command);
+                // Not a command, assume normal message
+                Log.Debug("No command parsed from message by {0}.", player.Name);
+                return EventEat.EatNone;
+            }
+            Log.Debug("Command parsed from message by {0}! Command: {1}; arguments: {2}",
+                player.Name, commandName, String.Join(", ", arguments));
+
+            ICommand command;
+            if (!_commandManager.FindCommand(commandName, out command))
+            {
+                Utilities.RawSayTo(player, "Command " + commandName + " not found!");
             }
             return EventEat.EatNone;
         }
