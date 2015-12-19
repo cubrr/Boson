@@ -17,16 +17,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using InfinityScript;
-using Boson.Commands;
-using Boson.Utility;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using Boson.Api;
 using Boson.Api.Commands;
+using Boson.Commands;
+using Boson.Utility;
+using InfinityScript;
 
 namespace Boson
 {
@@ -34,7 +34,7 @@ namespace Boson
     {
         private readonly ICommandParser _commandParser;
 
-        private readonly ICommandRepository _commandManager;
+        private readonly ICommandRepository _commandRepository;
 
         public BosonAdmin()
             : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
@@ -48,12 +48,17 @@ namespace Boson
         public BosonAdmin(ICommandParser parser, ICommandRepository manager)
         {
             if (parser == null)
+            {
                 throw new ArgumentNullException("parser");
+            }
+
             if (manager == null)
+            {
                 throw new ArgumentNullException("manager");
+            }
 
             _commandParser = parser;
-            _commandManager = manager;
+            _commandRepository = manager;
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
@@ -67,15 +72,38 @@ namespace Boson
                 Log.Debug("No command parsed from message by {0}.", player.Name);
                 return EventEat.EatNone;
             }
+
             Log.Debug("Command parsed from message by {0}! Command: {1}; arguments: {2}",
-                player.Name, commandName, String.Join(", ", arguments));
+                      player.Name,
+                      commandName,
+                      String.Join(", ", arguments));
+
+            var chatMessage = new ChatMessage(this, player, type, message);
+            string exceptionMessage;
+            BaseScript.EventEat returnValue = CallCommand(commandName, arguments, chatMessage, out exceptionMessage);
+
+            if (exceptionMessage != null)
+            {
+                // TODO: Send response to remote user? Not in this method though...
+                Utilities.RawSayTo(player, exceptionMessage);
+            }
+
+            return returnValue;
+        }
+        
+        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, ChatMessage message, out string exceptionMessage)
+        {
+            // TODO: Maybe some day we can call commands remotely
+            exceptionMessage = null;
 
             ICommand command;
-            if (!_commandManager.TryGetCommand(commandName, out command))
+            if (!_commandRepository.TryGetCommand(commandName, out command))
             {
-                Utilities.RawSayTo(player, "Command " + commandName + " not found!");
+                exceptionMessage = String.Format("Command {0} not found!", commandName);
+                return EventEat.EatGame;
             }
-            return EventEat.EatNone;
+
+            return EventEat.EatGame;
         }
     }
 }

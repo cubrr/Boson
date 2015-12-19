@@ -23,7 +23,7 @@ using InfinityScript;
 
 namespace Boson.Api
 {
-    public struct OnSayParameters
+    public struct ChatMessage
     {
         public BaseScript BaseScript { get; private set; }
 
@@ -31,15 +31,15 @@ namespace Boson.Api
 
         public BaseScript.ChatType ChatType { get; private set; }
 
-        public ICollection<string> Arguments { get; private set; }
+        public string Message { get; private set; }
 
-        public OnSayParameters(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, ICollection<string> args)
+        public ChatMessage(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, string message)
             : this()
         {
             BaseScript = baseScript;
             Caller = caller;
             ChatType = chatType;
-            Arguments = args;
+            Message = message;
         }
     }
 }
