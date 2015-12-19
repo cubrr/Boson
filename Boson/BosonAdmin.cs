@@ -71,7 +71,7 @@ namespace Boson
                 player.Name, commandName, String.Join(", ", arguments));
 
             ICommand command;
-            if (!_commandManager.FindCommand(commandName, out command))
+            if (!_commandManager.TryGetCommand(commandName, out command))
             {
                 Utilities.RawSayTo(player, "Command " + commandName + " not found!");
             }

@@ -30,9 +30,7 @@ namespace Boson.Utility
         {
             string formattedMessage = String.Format("[{0}][{1}]:\r\n    {2}", source, level, message);
             Debug.WriteLine(formattedMessage);
-#if (!DEBUG)
             Utilities.RawSayAll(formattedMessage);
-#endif
         }
 
         public bool WantsFilteredMessages

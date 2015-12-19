@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using InfinityScript;
 using Boson.Api;
 using Boson.Api.Commands;
+using InfinityScript;
 
 namespace Boson.Commands
 {
@@ -30,12 +30,27 @@ namespace Boson.Commands
     {
         private readonly IDictionary<string, ICommand> _commands;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CommandRepository"/> class using the
+        /// specified command provider.
+        /// </summary>
+        /// <param name="provider">Command provider used for fetching commands.</param>
         public CommandRepository(ICommandProvider provider)
         {
             _commands = provider.GetCommands();
         }
 
-        public bool FindCommand(string commandName, out ICommand command)
+        /// <summary>
+        /// Gets the command matching the specified name. A return value
+        /// indicates whether the lookup succeeded or failed.
+        /// </summary>
+        /// <param name="commandName">Name of the command to get.</param>
+        /// <param name="command">
+        /// When this method returns, contains the requested command if the
+        /// lookup succeeded, or <see langword="null"/> if the lookup failed.
+        /// </param>
+        /// <returns>Indicates whether the lookup succeeded or failed.</returns>
+        public bool TryGetCommand(string commandName, out ICommand command)
         {
             return _commands.TryGetValue(commandName, out command);
         }

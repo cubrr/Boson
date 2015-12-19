@@ -17,15 +17,15 @@
 
 using System;
 using System.Collections.Generic;
-using InfinityScript;
 using Boson.Api;
 using Boson.Api.Commands;
+using InfinityScript;
 
 namespace Boson.Commands
 {
     /// <summary>
-    /// Simple command parser which parses case-insensitive commands prefixed with the provided
-    /// symbol and parameters separated with the token delimiter.
+    ///     Simple command parser which parses case-insensitive commands prefixed with the specified
+    ///     command prefix and parameters separated with the specified token delimiter.
     /// </summary>
     public class SimpleCommandParser : ICommandParser
     {
@@ -36,20 +36,40 @@ namespace Boson.Commands
         /// </summary>
         private readonly string[] _tokenDelimiterCache;
 
-        protected SimpleCommandParser()
-        {
-        }
-
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SimpleCommandParser"/> class
+        ///     using the specified command prefix and token delimiter.
+        /// </summary>
+        /// <param name="commandPrefix">String prefix of the commands.</param>
+        /// <param name="tokenDelimiter">String delimiting the command and the parameters.</param>
         public SimpleCommandParser(string commandPrefix, string tokenDelimiter)
         {
             if (String.IsNullOrEmpty(commandPrefix))
+            {
                 throw new ArgumentNullException("commandPrefix");
+            }
+
             if (String.IsNullOrEmpty(tokenDelimiter))
+            {
                 throw new ArgumentNullException("tokenDelimiter");
+            }
+
             // TODO: Figure out max length of chat message. Neither prefix nor delimiter can be longer than max - 1.
-            
             _commandPrefix = commandPrefix;
             _tokenDelimiterCache = new[] { tokenDelimiter };
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SimpleCommandParser"/> class
+        ///     using the default command prefix and token delimiter.
+        /// <remarks>
+        ///     The default command prefix is the bang (<c>!</c>), and the default
+        ///     token delimiter is the whitespace (<c> </c>).
+        /// </remarks>
+        /// </summary>
+        protected SimpleCommandParser()
+            : this("!", " ")
+        {
         }
 
         /// <summary>

@@ -25,6 +25,6 @@ namespace Boson.Api.Commands
 {
     public interface ICommandRepository
     {
-        bool FindCommand(string commandName, out ICommand command);
+        bool TryGetCommand(string commandName, out ICommand command);
     }
 }

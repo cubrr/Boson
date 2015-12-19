@@ -27,24 +27,24 @@ using InfinityScript;
 namespace Boson.Commands
 {
     /// <summary>
-    /// Loads and provides commands from assemblies with reflection.
-    /// Command names are converted to lower case.
+    ///     Loads and provides commands from assemblies with reflection.
+    ///     Command names are converted to lower case.
     /// </summary>
     public class ReflectionCommandProvider : ICommandProvider
     {
         private readonly IEnumerable<Assembly> _sourceAssemblies;
 
         /// <summary>
-        /// Initializes a new instance of the ReflectionCommandProvider class
-        /// and specifies a list of source assemblies to search for commands.
+        ///     Initializes a new instance of the <see cref="ReflectionCommandProvider"/> class
+        ///     and specifies a list of source assemblies to search for commands.
         /// </summary>
         /// <param name="sourceAssemblies">
-        /// List of source assemblies to search for commands.
+        ///     List of source assemblies to search for commands.
         /// </param>
         /// <remarks>
         ///     <note type="note">
-        ///     The specified assemblies are not scanned until <see cref="GetCommands"/>
-        ///     is called.
+        ///         The specified assemblies are not scanned until <see cref="GetCommands"/>
+        ///         is called.
         ///     </note>
         /// </remarks>
         public ReflectionCommandProvider(params Assembly[] sourceAssemblies)
@@ -72,15 +72,15 @@ namespace Boson.Commands
         }
 
         /// <summary>
-        /// Initializes a new instance of the ReflectionCommandProvider class
-        /// without specifying a list of source assemblies to search for commands.
+        ///     Initializes a new instance of the ReflectionCommandProvider class
+        ///     without specifying a list of source assemblies to search for commands.
         /// </summary>
         protected ReflectionCommandProvider()
         {
         }
 
         /// <summary>
-        /// Predicate used to match ICommands.
+        ///     Gets the predicate used to identify ICommands types.
         /// </summary>
         protected virtual Func<Type, bool> CommandTypeFilter
         {
@@ -94,9 +94,9 @@ namespace Boson.Commands
         }
 
         /// <summary>
-        /// Maximum amount of exceptions that can be thrown while
-        /// constructing commands from an assembly before cancelling
-        /// further command construction from that assembly.
+        ///     Gets the maximum amount of exceptions that can be thrown while
+        ///     constructing commands from an assembly before cancelling
+        ///     further command construction from that assembly.
         /// </summary>
         protected virtual int MaxCommandAssemblyExceptions
         {
@@ -104,17 +104,18 @@ namespace Boson.Commands
         }
 
         /// <summary>
-        /// Scans the source assemblies for commands and returns a
-        /// dictionary where the key is the command's name and the
-        /// value is the ICommand itself.
+        ///     Scans the source assemblies for commands and returns a
+        ///     dictionary where the key is the command's name and the
+        ///     value is the ICommand itself.
         /// </summary>
         /// <returns>
-        /// A dictionary where the key is the command's name and the
-        /// value is the ICommand itself.
+        ///     A dictionary where the key is the command's name and the
+        ///     value is the ICommand itself.
         /// </returns>
         public IDictionary<string, ICommand> GetCommands()
         {
             // TODO: Change the return type to IEnumerable<ICommand> and let the consumer deal with the dictionary stuff?
+
             // Command names should be processed ignoring the case
             var dictionary = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
             foreach (Assembly assembly in _sourceAssemblies)
@@ -128,7 +129,9 @@ namespace Boson.Commands
         private void FindAndConstructCommands(IDictionary<string, ICommand> targetDictionary, Assembly assembly)
         {
             if (targetDictionary == null)
+            {
                 throw new ArgumentNullException("targetDictionary");
+            }
 
             int exceptionCount = 0;
             foreach (Type type in GetAssemblyCommands(assembly))

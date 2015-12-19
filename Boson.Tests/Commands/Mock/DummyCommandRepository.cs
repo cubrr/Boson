@@ -37,7 +37,7 @@ namespace Boson.Tests.Commands.Mock
             _outValue = outCommand;
         }
 
-        public bool FindCommand(string commandName, out ICommand command)
+        public bool TryGetCommand(string commandName, out ICommand command)
         {
             command = _outValue;
             return _returnValue;

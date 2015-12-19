@@ -19,18 +19,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using InfinityScript;
 using Boson.Api;
 using Boson.Api.Commands;
+using InfinityScript;
 
 namespace Boson.Commands
 {
+    /// <summary>
+    /// Base class for all commands. Provides properties for the name and
+    /// aliases, and methods for invoking the command and getting usage help.
+    /// </summary>
     public abstract class CommandBase : ICommand
     {
-        private readonly static string[] EmptyAliasList = new string[0];
+        private static readonly string[] EmptyAliasList = new string[0];
 
+        /// <summary>
+        /// Gets the name of the command.
+        /// </summary>
         public abstract string Name { get; }
 
+        /// <summary>
+        /// Gets the aliases of the command.
+        /// </summary>
         public virtual IEnumerable<string> Aliases
         {
             get { return EmptyAliasList; }
