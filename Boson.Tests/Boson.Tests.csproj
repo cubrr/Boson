@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="InfinityScript, Version=1.2.5767.2463, Culture=neutral, PublicKeyToken=98713b15ea221c09, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Games\MW3 Server\TeknoMW3 Server\InfinityScript.dll</HintPath>
+      <HintPath>..\Dependencies\InfinityScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
