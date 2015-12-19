@@ -70,6 +70,7 @@ namespace Boson
             {
                 // Not a command, assume normal message
                 Log.Debug("No command parsed from message by {0}.", player.Name);
+                // return EventEat.EatGame if the player is muted!
                 return EventEat.EatNone;
             }
 
@@ -102,6 +103,8 @@ namespace Boson
                 exceptionMessage = String.Format("Command {0} not found!", commandName);
                 return EventEat.EatGame;
             }
+
+            // Check user's command permissions
 
             return EventEat.EatGame;
         }
