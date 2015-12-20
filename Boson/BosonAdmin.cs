@@ -104,9 +104,10 @@ namespace Boson
                 return EventEat.EatGame;
             }
 
-            // Check user's command permissions
+            // Check user's command permissions here
+            EventEat result = command.Invoke(arguments, message);
 
-            return EventEat.EatGame;
+            return result;
         }
     }
 }
