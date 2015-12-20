@@ -24,6 +24,6 @@ namespace Boson.Api.Commands
 {
     public interface ICommandProvider
     {
-        IDictionary<string, ICommand> GetCommands();
+        IEnumerable<ICommand> GetCommands();
     }
 }

@@ -46,7 +46,10 @@ namespace Boson.Commands
             get { return EmptyAliasList; }
         }
 
-        public abstract BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context);
+        public virtual BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        {
+            return BaseScript.EventEat.EatGame;
+        }
 
         public abstract void PrintHelp(IList<string> commandParams, ChatMessage context);
     }

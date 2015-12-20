@@ -109,28 +109,25 @@ namespace Boson.Commands
         ///     value is the ICommand itself.
         /// </summary>
         /// <returns>
-        ///     A dictionary where the key is the command's name and the
-        ///     value is the ICommand itself.
+        ///     An <see cref="IEnumerable{ICommand}"/> containing constructed
+        ///     command instances from the source assemblies.
         /// </returns>
-        public IDictionary<string, ICommand> GetCommands()
+        public IEnumerable<ICommand> GetCommands()
         {
-            // TODO: Change the return type to IEnumerable<ICommand> and let the consumer deal with the dictionary stuff?
-
-            // Command names should be processed ignoring the case
-            var dictionary = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
+            var commands = new List<ICommand>();
             foreach (Assembly assembly in _sourceAssemblies)
             {
-                FindAndConstructCommands(dictionary, assembly);
+                FindAndConstructCommands(commands, assembly);
             }
 
-            return dictionary;
+            return commands;
         }
 
-        private void FindAndConstructCommands(IDictionary<string, ICommand> targetDictionary, Assembly assembly)
+        private void FindAndConstructCommands(IList<ICommand> list, Assembly assembly)
         {
-            if (targetDictionary == null)
+            if (list == null)
             {
-                throw new ArgumentNullException("targetDictionary");
+                throw new ArgumentNullException("targetDictionary", "Someone really fucked up this time!");
             }
 
             int exceptionCount = 0;
@@ -139,11 +136,7 @@ namespace Boson.Commands
                 try
                 {
                     var commandInstance = (ICommand)Activator.CreateInstance(type);
-                    AddCommand(targetDictionary, commandInstance.Name, commandInstance);
-                    foreach (string alias in commandInstance.Aliases)
-                    {
-                        AddCommand(targetDictionary, alias, commandInstance);
-                    }
+                    list.Add(commandInstance);
                 }
                 catch (Exception ex)
                 {
@@ -174,22 +167,6 @@ namespace Boson.Commands
                 Log.Error("Exception while loading command types from assembly! " + ex);
                 return new Type[0];
             }
-        }
-
-        private void AddCommand(IDictionary<string, ICommand> dict, string key, ICommand command)
-        {
-            ICommand existingInstance;
-
-            if (dict.TryGetValue(key, out existingInstance))
-            {
-                Log.Write(LogLevel.Warning,
-                          "Existing command {0} [{1}] replaced by identically named or aliased [{2}]!",
-                          key,
-                          existingInstance.GetType(),
-                          command.GetType());
-            }
-
-            dict[key] = command;
         }
     }
 }

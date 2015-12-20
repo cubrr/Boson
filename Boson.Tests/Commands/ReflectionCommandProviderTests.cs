@@ -104,24 +104,17 @@ namespace Boson.Tests.Commands
             }
 
             [TestMethod]
-            public void ReceivedCommandDictionry_NotNull()
+            public void ReceivedCommandEnumerable_NotNull()
             {
-                IDictionary<string, ICommand> cmds =_provider.GetCommands();
+                IEnumerable<ICommand> cmds =_provider.GetCommands();
                 Assert.IsNotNull(cmds);
             }
 
             [TestMethod]
-            public void ReceivedCommandDictionryValues_NotNull()
+            public void ReceivedCommands_NotNull()
             {
-                IDictionary<string, ICommand> cmds = _provider.GetCommands();
-                Assert.IsFalse(cmds.Any(pair => pair.Value == null));
-            }
-
-            [TestMethod]
-            public void ReceivedCommandDictinaryCommandNames_NotNullOrEmpty()
-            {
-                IDictionary<string, ICommand> cmds = _provider.GetCommands();
-                Assert.IsFalse(cmds.Any(pair => pair.Value == null));
+                IEnumerable<ICommand> cmds = _provider.GetCommands();
+                Assert.IsFalse(cmds.Any(cmd => cmd == null));
             }
         }
     }

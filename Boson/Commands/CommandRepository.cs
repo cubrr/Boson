@@ -37,7 +37,9 @@ namespace Boson.Commands
         /// <param name="provider">Command provider used for fetching commands.</param>
         public CommandRepository(ICommandProvider provider)
         {
-            _commands = provider.GetCommands();
+            // Command names should be processed ignoring the case
+            _commands = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
+            AddCommandsAndAliases(provider.GetCommands());
         }
 
         /// <summary>
@@ -53,6 +55,33 @@ namespace Boson.Commands
         public bool TryGetCommand(string commandName, out ICommand command)
         {
             return _commands.TryGetValue(commandName, out command);
+        }
+
+        private void AddCommandsAndAliases(IEnumerable<ICommand> commandRange)
+        {
+            foreach (ICommand command in commandRange)
+            {
+                AddCommand(command.Name, command);
+                foreach (string alias in command.Aliases)
+                {
+                    AddCommand(alias, command);
+                }
+            }
+        }
+
+        private void AddCommand(string key, ICommand command)
+        {
+            ICommand existingInstance;
+            if (_commands.TryGetValue(key, out existingInstance))
+            {
+                Log.Write(LogLevel.Warning,
+                          "Existing command {0} [{1}] replaced by identically named or aliased [{2}]!",
+                          key,
+                          existingInstance.GetType(),
+                          command.GetType());
+            }
+
+            _commands[key] = command;
         }
     }
 }
