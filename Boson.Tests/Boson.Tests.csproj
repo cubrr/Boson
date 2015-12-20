@@ -62,8 +62,6 @@
   <ItemGroup>
     <Compile Include="BosonAdminTests.cs" />
     <Compile Include="Commands\Mock\DummyCommand.cs" />
-    <Compile Include="Commands\Mock\MockCommands.cs" />
-    <Compile Include="Commands\Mock\MockCommandsWithExceptions.cs" />
     <Compile Include="Commands\Mock\ReflectionCommandProviderDerivingMock.cs" />
     <Compile Include="Commands\Mock\SimpleCommandParserDerivingMock.cs" />
     <Compile Include="Commands\Mock\DummyCommandParser.cs" />

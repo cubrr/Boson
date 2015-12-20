@@ -26,8 +26,8 @@ using InfinityScript;
 namespace Boson.Commands
 {
     /// <summary>
-    /// Base class for all commands. Provides properties for the name and
-    /// aliases, and methods for invoking the command and getting usage help.
+    /// A barebones base class for commands. Provides a static, empty
+    /// Aliases enumerable.
     /// </summary>
     public abstract class CommandBase : ICommand
     {
@@ -38,6 +38,10 @@ namespace Boson.Commands
         /// </summary>
         public abstract string Name { get; }
 
+        public abstract string Description { get; }
+
+        public abstract string Usage { get; }
+
         /// <summary>
         /// Gets the aliases of the command.
         /// </summary>
@@ -46,11 +50,6 @@ namespace Boson.Commands
             get { return EmptyAliasList; }
         }
 
-        public virtual BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
-        {
-            return BaseScript.EventEat.EatGame;
-        }
-
-        public abstract void PrintHelp(IList<string> commandParams, CommandMessage context);
+        public abstract BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context);
     }
 }

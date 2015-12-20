@@ -9,27 +9,48 @@ using InfinityScript;
 
 namespace Boson.Tests.Commands.Mock
 {
+    /// <summary>
+    /// Dummy command for testing command provider implementations.
+    /// </summary>
+    /// <seealso cref="Boson.Api.Commands.ICommand" />
+    /// <seealso cref="Boson.Api.Commands.ICommandProvider" />
     public class DummyCommand : ICommand
     {
+        public IEnumerable<string> Aliases
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public string Name
         {
-            get { return ""; }
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public IEnumerable<string> Aliases
+        public string Usage
         {
-            get { return new string[0]; }
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
-            return BaseScript.EventEat.EatNone;
-        }
-
-        public void PrintHelp(IList<string> commandParams, CommandMessage context)
-        {
-            
+            throw new NotImplementedException();
         }
     }
 }

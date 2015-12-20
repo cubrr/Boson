@@ -23,14 +23,63 @@ using InfinityScript;
 
 namespace Boson.Api.Commands
 {
+    /// <summary>
+    /// Represents an invokable player command.
+    /// </summary>
     public interface ICommand
     {
+        /// <summary>
+        /// Gets the name of the command.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         string Name { get; }
 
+        /// <summary>
+        /// Gets the description of the command.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        /// <remarks>
+        /// <note type="important">
+        /// Implementations should keep the description as compact as possible,
+        /// as the value is printed to the in-game chat.
+        /// </note>
+        /// </remarks>
+        string Description { get; }
+
+        /// <summary>
+        /// Gets usage help for the command.
+        /// </summary>
+        /// <value>
+        /// The usage help.
+        /// </value>
+        /// <remarks>
+        /// <note type="important">
+        /// Implementations should keep the description as compact as possible,
+        /// as the value is printed to the in-game chat.
+        /// </note>
+        /// </remarks>
+        string Usage { get; }
+
+        /// <summary>
+        /// Gets the aliases of the command.
+        /// </summary>
+        /// <value>
+        /// The aliases.
+        /// </value>
         IEnumerable<string> Aliases { get; }
 
+        /// <summary>
+        /// Invokes the command with the specified command parameters and
+        /// message context, and returns the command's requested
+        /// <see cref="BaseScript.EventEat"/> return value 
+        /// </summary>
+        /// <param name="commandParams">The command parameters.</param>
+        /// <param name="context">The message context.</param>
+        /// <returns>A <see cref="BaseScript.EventEat"/> enum value.</returns>
         BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context);
-
-        void PrintHelp(IList<string> commandParams, CommandMessage context);
     }
 }
