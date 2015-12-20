@@ -38,12 +38,12 @@ namespace Boson.Tests.Commands.Mock
             get { yield return "k"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
@@ -61,12 +61,12 @@ namespace Boson.Tests.Commands.Mock
             get { yield return "kick"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
@@ -84,12 +84,12 @@ namespace Boson.Tests.Commands.Mock
             get { yield return "b"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
@@ -102,12 +102,12 @@ namespace Boson.Tests.Commands.Mock
             get { return "debug"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
@@ -120,12 +120,12 @@ namespace Boson.Tests.Commands.Mock
             get { return "random"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
@@ -138,12 +138,12 @@ namespace Boson.Tests.Commands.Mock
             get { return "lulz"; }
         }
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }
 
-        public override void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public override void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             throw new NotImplementedException();
         }

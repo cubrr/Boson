@@ -23,7 +23,7 @@ using InfinityScript;
 
 namespace Boson.Api
 {
-    public struct ChatMessage
+    public struct CommandMessage
     {
         public BaseScript BaseScript { get; private set; }
 
@@ -33,7 +33,7 @@ namespace Boson.Api
 
         public string Message { get; private set; }
 
-        public ChatMessage(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, string message)
+        public CommandMessage(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, string message)
             : this()
         {
             BaseScript = baseScript;

@@ -79,7 +79,7 @@ namespace Boson
                       commandName,
                       String.Join(", ", arguments));
 
-            var chatMessage = new ChatMessage(this, player, type, message);
+            var chatMessage = new CommandMessage(this, player, type, message);
             string exceptionMessage;
             BaseScript.EventEat returnValue = CallCommand(commandName, arguments, chatMessage, out exceptionMessage);
 
@@ -92,7 +92,7 @@ namespace Boson
             return returnValue;
         }
         
-        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, ChatMessage message, out string exceptionMessage)
+        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, CommandMessage message, out string exceptionMessage)
         {
             // TODO: Maybe some day we can call commands remotely
             exceptionMessage = null;

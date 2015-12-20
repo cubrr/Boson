@@ -29,8 +29,8 @@ namespace Boson.Api.Commands
 
         IEnumerable<string> Aliases { get; }
 
-        BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context);
+        BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context);
 
-        void PrintHelp(IList<string> commandParams, ChatMessage context);
+        void PrintHelp(IList<string> commandParams, CommandMessage context);
     }
 }

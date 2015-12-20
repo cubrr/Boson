@@ -46,11 +46,11 @@ namespace Boson.Commands
             get { return EmptyAliasList; }
         }
 
-        public virtual BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public virtual BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             return BaseScript.EventEat.EatGame;
         }
 
-        public abstract void PrintHelp(IList<string> commandParams, ChatMessage context);
+        public abstract void PrintHelp(IList<string> commandParams, CommandMessage context);
     }
 }

@@ -22,12 +22,12 @@ namespace Boson.Tests.Commands.Mock
             get { return new string[0]; }
         }
 
-        public BaseScript.EventEat Invoke(IList<string> commandParams, ChatMessage context)
+        public BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
         {
             return BaseScript.EventEat.EatNone;
         }
 
-        public void PrintHelp(IList<string> commandParams, ChatMessage context)
+        public void PrintHelp(IList<string> commandParams, CommandMessage context)
         {
             
         }
