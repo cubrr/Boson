@@ -39,7 +39,7 @@ namespace Boson.Commands
         {
             // Command names should be processed ignoring the case
             _commands = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
-            AddCommandsAndAliases(provider.GetCommands());
+            AddCommandsAndAliases(_commands, provider.GetCommands());
         }
 
         /// <summary>
@@ -57,22 +57,22 @@ namespace Boson.Commands
             return _commands.TryGetValue(commandName, out command);
         }
 
-        private void AddCommandsAndAliases(IEnumerable<ICommand> commandRange)
+        private static void AddCommandsAndAliases(IDictionary<string, ICommand> dict, IEnumerable<ICommand> commandRange)
         {
             foreach (ICommand command in commandRange)
             {
-                AddCommand(command.Name, command);
+                AddCommand(dict, command.Name, command);
                 foreach (string alias in command.Aliases)
                 {
-                    AddCommand(alias, command);
+                    AddCommand(dict, alias, command);
                 }
             }
         }
 
-        private void AddCommand(string key, ICommand command)
+        private static void AddCommand(IDictionary<string, ICommand> dict, string key, ICommand command)
         {
             ICommand existingInstance;
-            if (_commands.TryGetValue(key, out existingInstance))
+            if (dict.TryGetValue(key, out existingInstance))
             {
                 Log.Write(LogLevel.Warning,
                           "Existing command {0} [{1}] replaced by identically named or aliased [{2}]!",
@@ -81,7 +81,7 @@ namespace Boson.Commands
                           command.GetType());
             }
 
-            _commands[key] = command;
+            dict[key] = command;
         }
     }
 }
