@@ -12,6 +12,7 @@ namespace Boson.Commands
     // See CommandRepository.cs for CommandRepository implementation
     public partial class CommandRepository : ICommandRepository
     {
+        [HideFromReflectionLoading]
         private class HelpCommand : CommandBase
         {
             private IDictionary<string, CommandRepositoryEntry> _commands;

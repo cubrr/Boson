@@ -45,10 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandRepository.cs" />
-    <Compile Include="Commands\Default\HelpCommand.cs" />
     <Compile Include="Commands\Default\PmCommand.cs" />
+    <Compile Include="Commands\HideFromReflectionLoadingAttribute.cs" />
     <Compile Include="Commands\ReflectionCommandProvider.cs" />
     <Compile Include="Commands\SimpleCommandParser.cs" />
     <Compile Include="BosonAdmin.cs" />

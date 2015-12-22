@@ -86,6 +86,7 @@ namespace Boson.Commands
             get
             {
                 return t => typeof(ICommand).IsAssignableFrom(t)
+                            && t.GetCustomAttribute<HideFromReflectionLoadingAttribute>() == null
                             && !t.IsAbstract
                             && !t.IsInterface
                             && !t.IsGenericType;
