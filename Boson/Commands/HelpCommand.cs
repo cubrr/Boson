@@ -19,6 +19,8 @@ namespace Boson.Commands
 
             private IEnumerable<string> _commandNames;
 
+            private StringBuilder _displaySingleCommandBuilder = new StringBuilder(300);
+
             public override IEnumerable<string> Aliases
             {
                 get
@@ -89,9 +91,20 @@ namespace Boson.Commands
                 }
 
                 // TODO: DRY
-                context.Caller.Call("println", entry.Command.Name);
-                context.Caller.Call("println", "Aliases: " + String.Join(", ", entry.Command.Aliases));
-                context.Caller.Call("println", "");
+                // TODO: Does println support line breaks?
+                _displaySingleCommandBuilder.Clear();
+
+                {
+                    StringBuilder s = _displaySingleCommandBuilder;
+                    s.AppendFormat("{0} - {1}", entry.Command.Name, entry.Command.Description);
+                    s.AppendLine();
+                    s.AppendFormat("Aliases: ", String.Join(", ", entry.Command.Aliases));
+                    s.AppendLine();
+                    s.AppendFormat("Usage: ", entry.Command.Usage);
+                    s.AppendLine();
+                }
+
+                context.Caller.Call("println", _displaySingleCommandBuilder.ToString());
             }
         }
     }
