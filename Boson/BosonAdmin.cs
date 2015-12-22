@@ -23,28 +23,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Boson.Api;
 using Boson.Api.Commands;
+using Boson.Api.Messaging;
 using Boson.Commands;
+using Boson.Messaging;
 using Boson.Utility;
 using InfinityScript;
 
 namespace Boson
 {
-    public class BosonAdmin : BaseScript
+    public class BosonAdmin : BosonAdminBase
     {
-        private readonly ICommandParser _commandParser;
+        private ICommandParser _commandParser;
 
-        private readonly ICommandRepository _commandRepository;
+        public override ICommandRepository CommandRepository { get; protected set; }
+        
+        public override IServerMessenger ServerMessenger { get; protected set; }
 
         public BosonAdmin()
-            : this(new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
-                   new CommandRepository(new ReflectionCommandProvider(Assembly.GetExecutingAssembly())))
+            : this(
+                  new SimpleCommandParser(commandPrefix: "!", tokenDelimiter: " "),
+                  new CommandRepository(new ReflectionCommandProvider(Assembly.GetExecutingAssembly())),
+                  new DefaultServerMessenger()
+              ) // TODO: okay this is getting ridiculous, there has to be a pattern for this
         {
 #if DEBUG
             Log.AddListener(new DebugLogListener());
 #endif
         }
 
-        public BosonAdmin(ICommandParser parser, ICommandRepository repository)
+        public BosonAdmin(ICommandParser parser, ICommandRepository repository, IServerMessenger messenger)
         {
             if (parser == null)
             {
@@ -57,7 +64,7 @@ namespace Boson
             }
 
             _commandParser = parser;
-            _commandRepository = repository;
+            CommandRepository = repository;
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
@@ -69,7 +76,7 @@ namespace Boson
             {
                 // Not a command, assume normal message
                 Log.Debug("No command parsed from message by {0}.", player.Name);
-                // return EventEat.EatGame if the player is muted!
+                // TODO: return EventEat.EatGame if the player is muted!
                 return EventEat.EatNone;
             }
 
@@ -80,7 +87,7 @@ namespace Boson
 
             var chatMessage = new CommandInvokationContext(this, player, type, message);
             string exceptionMessage;
-            BaseScript.EventEat returnValue = CallCommand(commandName, arguments, chatMessage, out exceptionMessage);
+            EventEat returnValue = CallCommand(commandName, arguments, chatMessage, out exceptionMessage);
 
             if (exceptionMessage != null)
             {
@@ -91,13 +98,13 @@ namespace Boson
             return returnValue;
         }
         
-        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, CommandInvokationContext message, out string exceptionMessage)
+        public EventEat CallCommand(string commandName, IList<string> arguments, CommandInvokationContext message, out string exceptionMessage)
         {
             // TODO: Maybe some day we can call commands remotely
             exceptionMessage = null;
 
             ICommand command;
-            if (!_commandRepository.TryGetCommand(commandName, out command))
+            if (!CommandRepository.TryGetCommand(commandName, out command))
             {
                 exceptionMessage = String.Format("Command {0} not found!", commandName);
                 return EventEat.EatGame;

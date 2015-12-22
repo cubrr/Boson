@@ -68,6 +68,7 @@
     <Compile Include="Commands\Mock\DummyCommandRepository.cs" />
     <Compile Include="Commands\ReflectionCommandProviderTests.cs" />
     <Compile Include="Commands\SimpleCommandParserTests.cs" />
+    <Compile Include="Messaging\Mock\DummyServerMessenger.cs" />
     <Compile Include="TestLogListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -46,13 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\HelpCommand.cs" />
-    <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandRepository.cs" />
     <Compile Include="Commands\Default\PmCommand.cs" />
     <Compile Include="Commands\HideFromReflectionLoadingAttribute.cs" />
     <Compile Include="Commands\ReflectionCommandProvider.cs" />
     <Compile Include="Commands\SimpleCommandParser.cs" />
     <Compile Include="BosonAdmin.cs" />
+    <Compile Include="Messaging\DefaultServerMessenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\DebugLogListener.cs" />
   </ItemGroup>

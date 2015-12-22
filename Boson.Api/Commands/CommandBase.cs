@@ -22,7 +22,7 @@ using Boson.Api;
 using Boson.Api.Commands;
 using InfinityScript;
 
-namespace Boson.Commands
+namespace Boson.Api.Commands
 {
     /// <summary>
     /// A barebones base class for commands. Provides a static, empty
@@ -37,8 +37,33 @@ namespace Boson.Commands
         /// </summary>
         public abstract string Name { get; }
 
+        /// <summary>
+        /// Gets the description of the command.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        /// <remarks>
+        /// <note type="important">
+        /// Implementations should keep the description as compact as possible,
+        /// as the value is printed to the in-game chat.
+        /// </note>
+        /// </remarks>
         public abstract string Description { get; }
 
+
+        /// <summary>
+        /// Gets usage help for the command.
+        /// </summary>
+        /// <value>
+        /// The usage help.
+        /// </value>
+        /// <remarks>
+        /// <note type="important">
+        /// Implementations should keep the description as compact as possible,
+        /// as the value is printed to the in-game chat.
+        /// </note>
+        /// </remarks>
         public abstract string Usage { get; }
 
         /// <summary>
@@ -49,6 +74,12 @@ namespace Boson.Commands
             get { return EmptyAliasEnumerable; }
         }
 
+        /// <summary>
+        /// Invokes the specified command arguments.
+        /// </summary>
+        /// <param name="commandArgs">The command arguments.</param>
+        /// <param name="context">The context.</param>
+        /// <returns></returns>
         public abstract BaseScript.EventEat Invoke(IList<string> commandArgs, CommandInvokationContext context);
     }
 }

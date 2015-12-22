@@ -19,6 +19,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Boson.Tests.Commands.Mock;
+using Boson.Tests.Messaging.Mock;
 using Boson.Api.Commands;
 using InfinityScript;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -51,23 +52,32 @@ namespace Boson.Tests
             [ExpectedException(typeof(ArgumentNullException))]
             public void NullCommandParserPassed_ThrowsException()
             {
-                new BosonAdmin(null,
-                               new DummyCommandRepository(true, null));
+                new BosonAdmin(
+                    null,
+                    new DummyCommandRepository(true, null),
+                    new DummyServerMessenger()
+                );
             }
 
             [TestMethod]
             [ExpectedException(typeof(ArgumentNullException))]
             public void NullCommandManagerPassed_ThrowsException()
             {
-                new BosonAdmin(new DummyCommandParser(true),
-                               null);
+                new BosonAdmin(
+                    new DummyCommandParser(true),
+                    null,
+                    new DummyServerMessenger()
+                );
             }
 
             [TestMethod]
-            public void SecondaryConstructorUsed_NoException()
+            public void SecondaryConstructorUsedCorrectly_NoException()
             {
-                new BosonAdmin(new DummyCommandParser(true),
-                               new DummyCommandRepository(true, null));
+                new BosonAdmin(
+                    new DummyCommandParser(true),
+                    new DummyCommandRepository(true, null),
+                    new DummyServerMessenger()
+                );
             }
         }
     }

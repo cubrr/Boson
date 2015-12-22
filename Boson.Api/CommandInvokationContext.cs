@@ -24,7 +24,7 @@ namespace Boson.Api
 {
     public class CommandInvokationContext
     {
-        public BaseScript BaseScript { get; private set; }
+        public BosonAdminBase BaseScript { get; private set; }
 
         public Entity Caller { get; private set; }
 
@@ -32,7 +32,7 @@ namespace Boson.Api
 
         public string Message { get; private set; }
 
-        public CommandInvokationContext(BaseScript baseScript, Entity caller, BaseScript.ChatType chatType, string message)
+        public CommandInvokationContext(BosonAdminBase baseScript, Entity caller, BaseScript.ChatType chatType, string message)
         {
             BaseScript = baseScript;
             Caller = caller;

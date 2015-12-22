@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandRepository.cs" />
     <Compile Include="Commands\ICommandParser.cs" />
     <Compile Include="Commands\ICommandProvider.cs" />
     <Compile Include="CommandInvokationContext.cs" />
+    <Compile Include="BosonAdminBase.cs" />
+    <Compile Include="Messaging\IServerMessenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
