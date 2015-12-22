@@ -40,7 +40,7 @@ namespace Boson.Commands.Default
 
         public override string Usage => "pm [slot#|recipient] [message]";
 
-        public override BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
+        public override BaseScript.EventEat Invoke(IList<string> commandArgs, CommandInvokationContext context)
         {
             throw new NotImplementedException();
         }

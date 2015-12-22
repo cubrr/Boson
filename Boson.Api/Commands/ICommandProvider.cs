@@ -21,8 +21,15 @@ using System.Text;
 
 namespace Boson.Api.Commands
 {
+    /// <summary>
+    /// Exposes a method to get player invokable commands.
+    /// </summary>
     public interface ICommandProvider
     {
+        /// <summary>
+        /// Gets the commands.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerable{ICommand}"/> containing the commands.</returns>
         IEnumerable<ICommand> GetCommands();
     }
 }

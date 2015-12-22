@@ -64,7 +64,7 @@ namespace Boson.Tests.Commands.Mock
             }
         }
 
-        public BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context)
+        public BaseScript.EventEat Invoke(IList<string> commandParams, CommandInvokationContext context)
         {
             throw new NotImplementedException();
         }

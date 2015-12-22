@@ -44,20 +44,20 @@ namespace Boson
 #endif
         }
 
-        public BosonAdmin(ICommandParser parser, ICommandRepository manager)
+        public BosonAdmin(ICommandParser parser, ICommandRepository repository)
         {
             if (parser == null)
             {
                 throw new ArgumentNullException("parser");
             }
 
-            if (manager == null)
+            if (repository == null)
             {
                 throw new ArgumentNullException("manager");
             }
 
             _commandParser = parser;
-            _commandRepository = manager;
+            _commandRepository = repository;
         }
 
         public override EventEat OnSay3(Entity player, ChatType type, string name, ref string message)
@@ -78,7 +78,7 @@ namespace Boson
                       commandName,
                       String.Join(", ", arguments));
 
-            var chatMessage = new CommandMessage(this, player, type, message);
+            var chatMessage = new CommandInvokationContext(this, player, type, message);
             string exceptionMessage;
             BaseScript.EventEat returnValue = CallCommand(commandName, arguments, chatMessage, out exceptionMessage);
 
@@ -91,7 +91,7 @@ namespace Boson
             return returnValue;
         }
         
-        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, CommandMessage message, out string exceptionMessage)
+        public BaseScript.EventEat CallCommand(string commandName, IList<string> arguments, CommandInvokationContext message, out string exceptionMessage)
         {
             // TODO: Maybe some day we can call commands remotely
             exceptionMessage = null;
@@ -103,7 +103,7 @@ namespace Boson
                 return EventEat.EatGame;
             }
 
-            // Check user's command permissions here
+            // TODO: Check user's command permissions here
             EventEat result = command.Invoke(arguments, message);
 
             return result;

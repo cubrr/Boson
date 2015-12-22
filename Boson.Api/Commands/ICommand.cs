@@ -79,6 +79,6 @@ namespace Boson.Api.Commands
         /// <param name="commandParams">The command parameters.</param>
         /// <param name="context">The message context.</param>
         /// <returns>A <see cref="BaseScript.EventEat"/> enum value.</returns>
-        BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context);
+        BaseScript.EventEat Invoke(IList<string> commandParams, CommandInvokationContext context);
     }
 }

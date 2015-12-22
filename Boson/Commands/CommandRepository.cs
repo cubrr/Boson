@@ -25,9 +25,9 @@ using InfinityScript;
 
 namespace Boson.Commands
 {
-    public class CommandRepository : ICommandRepository
+    public partial class CommandRepository : ICommandRepository
     {
-        private readonly IDictionary<string, ICommand> _commands;
+        private readonly IDictionary<string, CommandRepositoryEntry> _commands;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandRepository"/> class using the
@@ -37,7 +37,7 @@ namespace Boson.Commands
         public CommandRepository(ICommandProvider provider)
         {
             // Command names should be processed ignoring the case
-            _commands = new Dictionary<string, ICommand>(StringComparer.CurrentCultureIgnoreCase);
+            _commands = new Dictionary<string, CommandRepositoryEntry>(StringComparer.CurrentCultureIgnoreCase);
             AddCommandsAndAliases(_commands, provider.GetCommands());
         }
 
@@ -48,39 +48,64 @@ namespace Boson.Commands
         /// <param name="commandName">Name of the command to get.</param>
         /// <param name="command">
         /// When this method returns, contains the requested command if the
-        /// lookup succeeded, or <see langword="null"/> if the lookup failed.
+        /// lookup succeeded, or null if the lookup failed.
         /// </param>
         /// <returns>Indicates whether the lookup succeeded or failed.</returns>
         public bool TryGetCommand(string commandName, out ICommand command)
         {
-            return _commands.TryGetValue(commandName, out command);
+            CommandRepositoryEntry entry;
+            if (!_commands.TryGetValue(commandName, out entry))
+            {
+                command = null;
+                return false;
+            }
+
+            command = entry.Command;
+            return true;
         }
 
-        private static void AddCommandsAndAliases(IDictionary<string, ICommand> dict, IEnumerable<ICommand> commandRange)
+        private static void AddCommandsAndAliases(IDictionary<string, CommandRepositoryEntry> dict, IEnumerable<ICommand> commands)
         {
-            foreach (ICommand command in commandRange)
+            foreach (ICommand command in commands)
             {
-                AddCommand(dict, command.Name, command);
+                AddCommand(dict, command.Name, command, false);
                 foreach (string alias in command.Aliases)
                 {
-                    AddCommand(dict, alias, command);
+                    AddCommand(dict, alias, command, true);
                 }
             }
         }
 
-        private static void AddCommand(IDictionary<string, ICommand> dict, string key, ICommand command)
+        private static void AddCommand(IDictionary<string, CommandRepositoryEntry> dict, string key, ICommand command, bool isAlias)
         {
-            ICommand existingInstance;
+            CommandRepositoryEntry existingInstance;
             if (dict.TryGetValue(key, out existingInstance))
             {
                 Log.Write(LogLevel.Warning,
                           "Existing command {0} [{1}] replaced by identically named or aliased [{2}]!",
                           key,
-                          existingInstance.GetType(),
+                          existingInstance.Command.GetType(),
                           command.GetType());
             }
 
-            dict[key] = command;
+            dict[key] = new CommandRepositoryEntry(command, isAlias);
         }
+
+        #region CommandRepositoryEntry
+
+        private struct CommandRepositoryEntry
+        { 
+            public ICommand Command;
+
+            public bool IsAlias;
+
+            public CommandRepositoryEntry(ICommand cmd, bool isAlias)
+            {
+                Command = cmd;
+                IsAlias = isAlias;
+            }
+        }
+
+        #endregion
     }
 }

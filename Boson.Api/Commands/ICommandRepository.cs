@@ -22,6 +22,9 @@ using InfinityScript;
 
 namespace Boson.Api.Commands
 {
+    /// <summary>
+    /// Represents a repository of commands.
+    /// </summary>
     public interface ICommandRepository
     {
         bool TryGetCommand(string commandName, out ICommand command);

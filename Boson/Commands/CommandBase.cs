@@ -49,6 +49,6 @@ namespace Boson.Commands
             get { return EmptyAliasEnumerable; }
         }
 
-        public abstract BaseScript.EventEat Invoke(IList<string> commandParams, CommandMessage context);
+        public abstract BaseScript.EventEat Invoke(IList<string> commandArgs, CommandInvokationContext context);
     }
 }

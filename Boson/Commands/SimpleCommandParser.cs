@@ -23,21 +23,21 @@ using InfinityScript;
 namespace Boson.Commands
 {
     /// <summary>
-    ///     Simple command parser which parses case-insensitive commands prefixed with the specified
-    ///     command prefix and parameters separated with the specified token delimiter.
+    /// Simple command parser which parses case-insensitive commands prefixed with the specified
+    /// command prefix and parameters separated with the specified token delimiter.
     /// </summary>
     public class SimpleCommandParser : ICommandParser
     {
         private readonly string _commandPrefix;
 
         /// <summary>
-        ///     Cache instance of the delimiter for use with String.Split
+        /// Cached string[] instance of the delimiter for use with String.Split
         /// </summary>
         private readonly string[] _tokenDelimiterCache;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SimpleCommandParser"/> class
-        ///     using the specified command prefix and token delimiter.
+        /// Initializes a new instance of the <see cref="SimpleCommandParser"/> class
+        /// using the specified command prefix and token delimiter.
         /// </summary>
         /// <param name="commandPrefix">String prefix of the commands.</param>
         /// <param name="tokenDelimiter">String delimiting the command and the parameters.</param>
@@ -59,11 +59,11 @@ namespace Boson.Commands
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SimpleCommandParser"/> class
-        ///     using the default command prefix and token delimiter.
+        /// Initializes a new instance of the <see cref="SimpleCommandParser"/> class
+        /// using the default command prefix and token delimiter.
         /// <remarks>
-        ///     The default command prefix is the bang (<c>!</c>), and the default
-        ///     token delimiter is the whitespace (<c> </c>).
+        /// The default command prefix is the bang (<c>!</c>), and the default
+        /// token delimiter is the whitespace (<c> </c>).
         /// </remarks>
         /// </summary>
         protected SimpleCommandParser()
@@ -72,8 +72,8 @@ namespace Boson.Commands
         }
 
         /// <summary>
-        ///     Parses the command from the provided message and returns a value depicting
-        ///     whether the parsing succeeded.
+        /// Parses the command from the provided message and returns a value depicting
+        /// whether the parsing succeeded.
         /// </summary>
         /// <param name="message">Chat message to parse.</param>
         /// <param name="command">Parsed command.</param>
@@ -84,22 +84,22 @@ namespace Boson.Commands
             command = null;
             arguments = null;
 
-            if (!CheckMessageSanity(message))
+            if (!ValidateCommandMessage(message))
             {
                 return false;
             }
 
-            string untokenizedMessage = message.Substring(_commandPrefix.Length);
-            var tokens = new List<string>(untokenizedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None));
+            string unprefixedMessage = message.Substring(_commandPrefix.Length);
+            var tokens = new List<string>(unprefixedMessage.Split(_tokenDelimiterCache, StringSplitOptions.None));
 
-            command = tokens[0].ToLower();
-            tokens.RemoveAt(0);
+            command = tokens[0];
+            tokens.RemoveAt(0); // Command name doesn't belong to the args
             arguments = tokens;
 
             return true;
         }
 
-        private bool CheckMessageSanity(string message)
+        private bool ValidateCommandMessage(string message)
         {
             bool ret = message != null
                        && message.Length >= _commandPrefix.Length + 1
