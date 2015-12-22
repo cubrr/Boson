@@ -51,8 +51,8 @@ namespace Boson.Commands.Default
 
             // TODO: Slot id handling
 
-            // pls no breach of trust by other plugins
-            return BaseScript.EventEat.EatScript;
+            
+            return BaseScript.EventEat.EatScript; // pls no breach of trust by other plugins
         }
     }
 }
